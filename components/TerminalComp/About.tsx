@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // Enhanced SVG Icons with hover animations - Mobile responsive
-const CodeIcon = () => (
+const CodeIcon: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -19,7 +19,7 @@ const CodeIcon = () => (
   </svg>
 );
 
-const ServerIcon = () => (
+const ServerIcon: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -39,7 +39,7 @@ const ServerIcon = () => (
   </svg>
 );
 
-const BrainIcon = () => (
+const BrainIcon: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -57,7 +57,7 @@ const BrainIcon = () => (
   </svg>
 );
 
-const YoutubeIcon = () => (
+const YoutubeIcon: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -76,9 +76,17 @@ const YoutubeIcon = () => (
 );
 
 // Typewriter effect component
-const TypewriterText = ({ text, delay = 50 }) => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+interface TypewriterTextProps {
+  text: string;
+  delay?: number;
+}
+
+const TypewriterText: React.FC<TypewriterTextProps> = ({
+  text,
+  delay = 50,
+}) => {
+  const [displayText, setDisplayText] = useState<string>("");
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   useEffect(() => {
     if (currentIndex < text.length) {
@@ -102,10 +110,10 @@ const TypewriterText = ({ text, delay = 50 }) => {
 };
 
 // Matrix rain effect (responsive)
-const MatrixRain = () => {
+const MatrixRain: React.FC = () => {
   const chars = "01";
-  // Responsive columns - fewer on mobile
-  const columns = window.innerWidth < 768 ? 20 : 50;
+  const columns =
+    typeof window !== "undefined" && window.innerWidth < 768 ? 20 : 50;
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
@@ -129,8 +137,8 @@ const MatrixRain = () => {
   );
 };
 
-const About = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
+const About: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -307,38 +315,6 @@ const About = () => {
                 </div>
               </div>
 
-              {/* Backend Card - Mobile optimized */}
-              {/* <div className="group border border-green-800/40 bg-gradient-to-br from-green-900/20 to-black/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl hover:border-green-400/60 transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105 hover:shadow-2xl hover:shadow-green-900/30 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-3 sm:mb-4">
-                    <ServerIcon />
-                  </div>
-                  <h3 className="font-bold text-green-400 text-lg sm:text-xl mb-2 sm:mb-3 font-mono">
-                    Back-End Systems
-                  </h3>
-                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-                    Mastering backend development with JavaScript, Node.js, Express, APIs, and MongoDB to architect scalable web applications.
-                  </p>
-                </div>
-              </div> */}
-
-              {/* AI/ML Card - Mobile optimized */}
-              {/* <div className="group border border-green-800/40 bg-gradient-to-br from-green-900/20 to-black/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl hover:border-green-400/60 transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105 hover:shadow-2xl hover:shadow-green-900/30 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-3 sm:mb-4">
-                    <BrainIcon />
-                  </div>
-                  <h3 className="font-bold text-green-400 text-lg sm:text-xl mb-2 sm:mb-3 font-mono">
-                    AI/ML Research
-                  </h3>
-                  <p className="text-gray-400 text-sm sm:text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-                    Diving deep into AI/ML with focus on data-driven models, pattern recognition, and developing intelligent applications.
-                  </p>
-                </div>
-              </div> */}
-
               {/* YouTube Card - Mobile optimized */}
               <div className="group border border-green-800/40 bg-gradient-to-br from-green-900/20 to-black/80 backdrop-blur-sm p-4 sm:p-6 rounded-xl hover:border-green-400/60 transition-all duration-500 hover:scale-[1.02] sm:hover:scale-105 hover:shadow-2xl hover:shadow-green-900/30 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-green-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -375,7 +351,7 @@ const About = () => {
         </div>
       </div>
 
-      <style jsx="true">{`
+      <style jsx>{`
         @keyframes matrix-fall {
           0% {
             transform: translateY(-100vh);
