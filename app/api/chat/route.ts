@@ -1,47 +1,123 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI, GenerationConfig } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAi = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+const apiKey = process.env.GEMINI_API_KEY;
+const genAI = new GoogleGenerativeAI(apiKey || "");
 
-if (!process.env.GEMINI_API_KEY) {
-  throw new Error("API Key has some issues");
+const CONTEXT_PARTS = {
+  base: `You are Mors's AI assistant. Answer concisely (2-3 sentences). Mors (Anup Pradhan) is a Full-Stack MERN Developer, BCA student at Amity University (CGPA: 8.96).`,
+
+  skills: `Tech Stack: JavaScript/TypeScript, Python, React, Node.js, Express, MongoDB, Tailwind, Docker, Git, TensorFlow, Cohere AI.`,
+
+  projects: `Key Projects:
+1. WhatsApp Campaign (MERN+TS, admin system) - github.com/M0rs-Ruki/WhatsApp-Campaigner
+2. RukiAI (AI finance tracker) - rukiai.online
+3. Neural Network from scratch (Python/NumPy)
+Type 'projects' to see all.`,
+
+  contact: `Contact: anuppradhan929@gmail.com | GitHub: M0rs-Ruki | LinkedIn: anup-pradhan77 | Bhubaneswar, India. Type 'contact' for full info.`,
+
+  education: `Education: BCA at Amity University (2024-27, CGPA 8.96), I.T. at Autonomous College Khariar (2022-24).`,
+};
+
+function getRelevantContext(question: string): string {
+  const q = question.toLowerCase();
+  let context = CONTEXT_PARTS.base;
+
+  if (
+    q.includes("skill") ||
+    q.includes("tech") ||
+    q.includes("know") ||
+    q.includes("language")
+  ) {
+    context += "\n" + CONTEXT_PARTS.skills;
+  }
+
+  if (
+    q.includes("project") ||
+    q.includes("built") ||
+    q.includes("work") ||
+    q.includes("portfolio")
+  ) {
+    context += "\n" + CONTEXT_PARTS.projects;
+  }
+
+  if (
+    q.includes("contact") ||
+    q.includes("reach") ||
+    q.includes("email") ||
+    q.includes("linkedin")
+  ) {
+    context += "\n" + CONTEXT_PARTS.contact;
+  }
+
+  if (
+    q.includes("study") ||
+    q.includes("education") ||
+    q.includes("university") ||
+    q.includes("college")
+  ) {
+    context += "\n" + CONTEXT_PARTS.education;
+  }
+
+  if (
+    q.includes("who") ||
+    q.includes("about mors") ||
+    q.includes("tell me about")
+  ) {
+    context += "\n" + CONTEXT_PARTS.skills + "\n" + CONTEXT_PARTS.projects;
+  }
+
+  return context;
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const { messages } = await request.json();
-
-    if (!messages || messages.length === 0) {
+    if (!apiKey) {
       return NextResponse.json(
-        { error: "No messages provided" },
+        { error: "API key not configured", success: false },
+        { status: 500 }
+      );
+    }
+
+    const { message } = await request.json();
+
+    if (!message || message.trim().length === 0) {
+      return NextResponse.json(
+        { error: "No message provided", success: false },
         { status: 400 }
       );
     }
 
-    const generationConfig: GenerationConfig = {
-      maxOutputTokens: 1000,
-      temperature: 0.9,
-      topP: 1,
-    };
-    const model = genAi.getGenerativeModel({
-      model: "gemini-1.5-flash",
+    const relevantContext = getRelevantContext(message);
+
+    console.log("📊 Context tokens (approx):", relevantContext.length / 4);
+
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash-lite",
+      generationConfig: {
+        maxOutputTokens: 250,
+        temperature: 0.7,
+      },
+      systemInstruction: relevantContext,
     });
 
-    // --- 3. Pass the config as the second argument ---
-    const result = await model.generateContent(messages, generationConfig);
-
-    // --- 4. Fix how you get the text response ---
-    const response = result.response;
-    const text = response.text();
+    const chat = model.startChat({ history: [] });
+    const result = await chat.sendMessage(message);
+    const text = result.response.text();
 
     return NextResponse.json({
       response: text,
       success: true,
     });
   } catch (error: any) {
-    console.error("Gemini API Error:", error);
+    console.error("Gemini Error:", error);
     return NextResponse.json(
-      { error: "Failed to generate AI response", details: error.message },
+      {
+        error: "AI temporarily unavailable",
+        details: error.message,
+        success: false,
+      },
       { status: 500 }
     );
   }

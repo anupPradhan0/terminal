@@ -107,14 +107,12 @@ const AIResponse: React.FC<{ text: string }> = ({ text }) => {
   return (
     <div className="ai-response">
       <div className="flex items-center space-x-2 mb-2">
-        <span className="text-cyan-400 font-mono text-sm">
-          🤖 AI Assistant:
-        </span>
+        <span className="text-green-400 font-mono text-sm">AI Assistant:</span>
       </div>
       <div className="text-gray-300 font-mono text-sm leading-relaxed whitespace-pre-wrap">
         {displayedText}
         {currentIndex < text.length && (
-          <span className="animate-pulse text-cyan-400">|</span>
+          <span className="animate-pulse text-green-400">|</span>
         )}
       </div>
     </div>
@@ -124,8 +122,8 @@ const AIResponse: React.FC<{ text: string }> = ({ text }) => {
 // ============ NEW: Loading Indicator ============
 const AILoading: React.FC = () => {
   return (
-    <div className="flex items-center space-x-2 text-cyan-400 font-mono text-sm">
-      <span>🤖 AI thinking</span>
+    <div className="flex items-center space-x-2 text-green-400 font-mono text-sm">
+      <span>AI thinking</span>
       <span className="animate-pulse">...</span>
     </div>
   );
@@ -281,7 +279,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       const newHist = [...history];
       newHist.push({
         type: "output",
-        content: "❌ Please provide a question. Usage: ai <your question>",
+        content: "Please provide a question. Usage: ai <your question>",
       });
       setHistory(newHist);
       return;
@@ -293,8 +291,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       const newHist = [...history];
       newHist.push({
         type: "output",
-        content:
-          "⚠️ Daily AI request limit reached (10/day). Try again tomorrow!",
+        content: "Daily AI request limit reached (10/day). Try again tomorrow!",
       });
       setHistory(newHist);
       return;
@@ -310,7 +307,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
     setHistory(loadingHist);
 
     try {
-      // Call API
+      // Call API with correct payload
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -334,12 +331,12 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
         });
         newHist.push({
           type: "output",
-          content: `\n💡 Remaining AI requests today: ${newRemaining}/10`,
+          content: `\n Remaining AI requests today: ${newRemaining}/10`,
         });
       } else {
         newHist.push({
           type: "output",
-          content: `❌ AI Error: ${data.error}`,
+          content: `AI Error: ${data.error}`,
         });
       }
 
@@ -349,13 +346,16 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       const newHist = [...history];
       newHist.push({
         type: "output",
-        content: "❌ Failed to connect to AI. Please try again.",
+        content: "Failed to connect to AI. Please try again.",
       });
       setHistory(newHist);
     }
   };
 
-  const processCommand = (cmd: string, isAuto: boolean = false): void => {
+  const processCommand = async (
+    cmd: string,
+    isAuto: boolean = false
+  ): Promise<void> => {
     const newHist: HistoryLine[] = [
       ...history,
       { type: "prompt", command: cmd },
@@ -366,17 +366,27 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       setIsFirstUserCommand(false);
     }
 
-    const trimmedCmd = cmd.trim().toLowerCase();
+    const trimmedCmd = cmd.trim();
 
-    // ============ NEW: Check for AI command ============
-    if (trimmedCmd.startsWith("ai ")) {
-      const question = cmd.substring(3); // Remove 'ai ' prefix
+    // ============ FIXED: Check for AI command (case insensitive) ============
+    if (trimmedCmd.toLowerCase().startsWith("ai ")) {
+      const question = trimmedCmd.substring(3);
       setHistory(newHist);
-      handleAICommand(question);
+      await handleAICommand(question);
       return;
     }
 
-    switch (trimmedCmd) {
+    // Handle 'ai' alone without question
+    if (trimmedCmd.toLowerCase() === "ai") {
+      newHist.push({
+        type: "output",
+        content: "Please provide a question. Usage: ai <your question>",
+      });
+      setHistory(newHist);
+      return;
+    }
+
+    switch (trimmedCmd.toLowerCase()) {
       case "help":
       case "ls":
         newHist.push({ type: "output", content: <Help key={Date.now()} /> });
@@ -421,7 +431,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (isAILoading) return; // Prevent new commands while AI is loading
+    if (isAILoading) return;
     processCommand(input);
     setInput("");
   };
