@@ -5,9 +5,9 @@ const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey || "");
 
 const CONTEXT_PARTS = {
-  base: `You are Mors's AI assistant. Answer concisely (2-3 sentences). Mors (Anup Pradhan) is a Full-Stack MERN Developer, BCA student at Amity University (CGPA: 8.96).`,
+  base: `You are Mors's AI assistant. Answer concisely (2-3 sentences). Mors (Anup Pradhan) is a Full-Stack MERN Developer with Next.js, BCA student at Amity University (CGPA: 8.96).`,
 
-  skills: `Tech Stack: JavaScript/TypeScript, Python, React, Node.js, Express, MongoDB, Tailwind, Docker, Git, TensorFlow, Cohere AI.`,
+  skills: `Tech Stack: JavaScript/TypeScript, Python, React, Next.js, Node.js, Express, MongoDB, Tailwind, Docker, Git, TensorFlow, Cohere AI.`,
 
   projects: `Key Projects:
 1. WhatsApp Campaign (MERN+TS, admin system) - github.com/M0rs-Ruki/WhatsApp-Campaigner
