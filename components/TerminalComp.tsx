@@ -436,7 +436,9 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
     setInput("");
   };
 
-  const handleNav = (cmd: string): void => processCommand(cmd);
+  const handleNav = async (cmd: string): Promise<void> => {
+    await processCommand(cmd);
+  };
 
   const focusInput = (): void => {
     const isTouchDevice =
