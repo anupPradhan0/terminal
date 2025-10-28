@@ -1,36 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import '@/public/css/IdentityComp.css';
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import "@/public/css/IdentityComp.css";
 
-const IdentityComp = ({
+interface IdentityCompProps {
+  name?: string;
+  title?: string;
+  company?: string;
+  photo?: string;
+  id?: string;
+}
+
+const IdentityComp: React.FC<IdentityCompProps> = ({
   name = "Anup Pradhan (Mors)",
-  title = "Full Stack Developer", 
-  company = "Non",
-  photo = "./images/your-photo.jpg",
-  id = "EMP001"
+  title = "Full Stack Developer",
+  company = "chati.ai",
+  photo = "/images/your-photo.jpg",
+  id = "EMP001",
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   // Detect mobile devices
   useEffect(() => {
-    const checkMobile = () => {
+    const checkMobile = (): void => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Handle touch events for mobile
-  const handleTouchStart = () => {
+  const handleTouchStart = (): void => {
     if (isMobile) {
       setIsHovered(true);
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (): void => {
     if (isMobile) {
       setTimeout(() => setIsHovered(false), 2000);
     }
@@ -47,72 +56,86 @@ const IdentityComp = ({
       )}
 
       {/* ID Card */}
-      <div
-        className={`identity-card ${isHovered ? 'hovered' : ''} ${isMobile ? 'mobile' : ''}`}
+      <article
+        className={`identity-card ${isHovered ? "hovered" : ""} ${
+          isMobile ? "mobile" : ""
+        }`}
         onMouseEnter={() => !isMobile && setIsHovered(true)}
         onMouseLeave={() => !isMobile && setIsHovered(false)}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        aria-label="Identity card"
+        aria-label={`Identity card for ${name}, ${title}`}
+        itemScope
+        itemType="https://schema.org/Person"
       >
         {/* Subtle grid/glow backdrop */}
-        <div aria-hidden className="backdrop-glow" />
+        <div aria-hidden="true" className="backdrop-glow" />
 
         {/* CRT scanlines overlay */}
-        <div aria-hidden className="crt-scanlines" />
+        <div aria-hidden="true" className="crt-scanlines" />
 
         {/* Card Header - Smaller on mobile */}
-        <div className="card-header">
-          <div className="company-logo">
+        <header className="card-header">
+          <div className="company-logo" aria-hidden="true">
             <span className="logo-icon">&lt;/&gt;</span>
           </div>
-          <div className="company-name">
+          <div className="company-name" itemProp="worksFor">
             {company}
           </div>
-        </div>
+        </header>
 
         {/* Photo Section */}
         <div className="photo-section">
           <div className="photo-frame">
-            <img
+            <Image
               src={photo}
-              alt="Profile"
+              alt={`${name} profile photo`}
+              width={150}
+              height={150}
               className="profile-photo"
+              priority
+              itemProp="image"
             />
-            <div className="photo-overlay" />
+            <div className="photo-overlay" aria-hidden="true" />
           </div>
         </div>
 
         {/* Info Section */}
         <div className="info-section">
-          <h3 className="employee-name">
+          <h3 className="employee-name" itemProp="name">
             {name}
           </h3>
-          <p className="employee-title">
+          <p className="employee-title" itemProp="jobTitle">
             {title}
           </p>
-          <div className="employee-id">
+          <div className="employee-id" itemProp="identifier">
             ID: {id}
           </div>
         </div>
 
         {/* Card Footer - Hide AUTHORIZED on mobile */}
         {!isMobile && (
-          <div className="card-footer">
+          <footer className="card-footer">
             <div className="access-level">
-              <span className="status-indicator" />
+              <span className="status-indicator" aria-hidden="true" />
               <span>AUTHORIZED</span>
             </div>
-          </div>
+          </footer>
         )}
 
         {/* Holographic Effect */}
-        <div aria-hidden className="holographic-overlay" />
-      </div>
+        <div aria-hidden="true" className="holographic-overlay" />
+      </article>
 
       {/* Interactive Label */}
-      <div className="interaction-label">
-        {isMobile ? '[負けたらどうせ俺はその程度の男なんだから…]' : '[負けたらどうせ俺はその程度の男なんだから…]'}
+      <div
+        className="interaction-label"
+        role="complementary"
+        aria-label="Motivational quote"
+      >
+        {isMobile
+          ? "[負けたらどうせ俺はその程度の男なんだから…]"
+          : "[負けたらどうせ俺はその程度の男なんだから…]"}
       </div>
     </div>
   );

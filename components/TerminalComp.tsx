@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import "@/public/css/TerminalComp.css";
 
@@ -7,8 +6,38 @@ import Projects from "./TerminalComp/Projects";
 import Skills from "./TerminalComp/Skills";
 import Contact from "./TerminalComp/Contact";
 
-const Prompt = ({ user, host }) => (
-  <span>
+// Type definitions
+interface PromptProps {
+  user: string;
+  host: string;
+}
+
+interface OutputLineProps {
+  children: React.ReactNode;
+}
+
+interface HistoryLine {
+  type: "prompt" | "output";
+  command?: string;
+  content?: React.ReactNode | string;
+}
+
+interface HelpItem {
+  type: "title" | "command";
+  text?: string;
+  command?: string;
+  description?: string;
+}
+
+interface TerminalProps {
+  onFirstCommand?: () => void;
+}
+
+const Prompt: React.FC<PromptProps> = ({ user, host }) => (
+  <span
+    className="terminal-prompt"
+    aria-label={`Command prompt for ${user} at ${host}`}
+  >
     <span className="prompt-user">
       {user}@{host}
     </span>
@@ -18,15 +47,15 @@ const Prompt = ({ user, host }) => (
   </span>
 );
 
-const OutputLine = ({ children }) => (
+const OutputLine: React.FC<OutputLineProps> = ({ children }) => (
   <div className="output-line">{children}</div>
 );
 
-const Help = () => {
-  const [displayedItems, setDisplayedItems] = useState([]);
-  const [currentStep, setCurrentStep] = useState(0);
+const Help: React.FC = () => {
+  const [displayedItems, setDisplayedItems] = useState<HelpItem[]>([]);
+  const [currentStep, setCurrentStep] = useState<number>(0);
 
-  const helpItems = [
+  const helpItems: HelpItem[] = [
     { type: "title", text: "Available commands:" },
     {
       type: "command",
@@ -73,28 +102,33 @@ const Help = () => {
   }, [currentStep]);
 
   return (
-    <div className="help-command">
+    <div className="help-command" role="region" aria-label="Help menu">
       {displayedItems.map((item, i) =>
         item.type === "title" ? (
           <p key={i}>{item.text}</p>
         ) : (
           <ul key={i}>
             <li>
-              <span>{item.command}</span> – {item.description}
+              <span className="command-name">{item.command}</span> –{" "}
+              {item.description}
             </li>
           </ul>
         )
       )}
-      {currentStep < helpItems.length && <span className="cursor">|</span>}
+      {currentStep < helpItems.length && (
+        <span className="cursor" aria-hidden="true">
+          |
+        </span>
+      )}
     </div>
   );
 };
 
-const Welcome = () => {
-  const [displayedLines, setDisplayedLines] = useState([]);
-  const [currentLine, setCurrentLine] = useState(0);
+const Welcome: React.FC = () => {
+  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
+  const [currentLine, setCurrentLine] = useState<number>(0);
 
-  const welcomeLines = [
+  const welcomeLines: string[] = [
     "Hi, I'm Anup Pradhan (Mors), a Full-Stack Developer.",
     "Welcome to my interactive portfolio terminal!",
     "Type 'help' or 'ls' to see available commands.",
@@ -111,31 +145,40 @@ const Welcome = () => {
   }, [currentLine]);
 
   return (
-    <>
+    <div role="region" aria-label="Welcome message">
       {displayedLines.map((line, i) => (
         <OutputLine key={i}>{line}</OutputLine>
       ))}
-      {currentLine < welcomeLines.length && <span className="cursor">|</span>}
-    </>
+      {currentLine < welcomeLines.length && (
+        <span className="cursor" aria-hidden="true">
+          |
+        </span>
+      )}
+    </div>
   );
 };
 
-export default function Terminal({ onFirstCommand }) {
-  const [history, setHistory] = useState([]);
-  const [input, setInput] = useState("");
-  const [isFirstUserCommand, setIsFirstUserCommand] = useState(true);
-  const terminalRef = useRef(null);
-  const inputRef = useRef(null);
+export default function Terminal({ onFirstCommand }: TerminalProps) {
+  const [history, setHistory] = useState<HistoryLine[]>([]);
+  const [input, setInput] = useState<string>("");
+  const [isFirstUserCommand, setIsFirstUserCommand] = useState<boolean>(true);
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const user = "mors";
   const host = "ruki";
 
-  const processCommand = (cmd, isAuto = false) => {
-    const newHist = [...history, { type: "prompt", command: cmd }];
+  const processCommand = (cmd: string, isAuto: boolean = false): void => {
+    const newHist: HistoryLine[] = [
+      ...history,
+      { type: "prompt", command: cmd },
+    ];
+
     if (isFirstUserCommand && !isAuto && onFirstCommand) {
       onFirstCommand();
       setIsFirstUserCommand(false);
     }
+
     switch (cmd.trim().toLowerCase()) {
       case "help":
       case "ls":
@@ -179,15 +222,15 @@ export default function Terminal({ onFirstCommand }) {
     setHistory(newHist);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     processCommand(input);
     setInput("");
   };
 
-  const handleNav = (cmd) => processCommand(cmd);
+  const handleNav = (cmd: string): void => processCommand(cmd);
 
-  const focusInput = () => {
+  const focusInput = (): void => {
     const isTouchDevice =
       "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
@@ -217,14 +260,19 @@ export default function Terminal({ onFirstCommand }) {
   }, [history]);
 
   return (
-    <div className="terminal-container" onClick={focusInput}>
+    <div
+      className="terminal-container"
+      onClick={focusInput}
+      role="application"
+      aria-label="Interactive terminal"
+    >
       <header className="terminal-header">
-        <div className="window-dots">
-          <div className="dot dot-red"></div>
-          <div className="dot dot-yellow"></div>
-          <div className="dot dot-green"></div>
+        <div className="window-dots" aria-hidden="true">
+          <div className="dot dot-red" aria-label="Close"></div>
+          <div className="dot dot-yellow" aria-label="Minimize"></div>
+          <div className="dot dot-green" aria-label="Maximize"></div>
         </div>
-        <nav className="terminal-nav">
+        <nav className="terminal-nav" aria-label="Terminal navigation">
           {[
             "welcome",
             "help",
@@ -239,13 +287,20 @@ export default function Terminal({ onFirstCommand }) {
               key={cmd}
               onClick={() => handleNav(cmd)}
               className="nav-button"
+              type="button"
+              aria-label={`Navigate to ${cmd}`}
             >
               {cmd}
             </button>
           ))}
         </nav>
       </header>
-      <main ref={terminalRef} className="terminal-body">
+      <main
+        ref={terminalRef}
+        className="terminal-body"
+        aria-live="polite"
+        aria-atomic="false"
+      >
         {history.map((line, i) => (
           <div key={i} className="history-line">
             {line.type === "prompt" ? (
@@ -259,14 +314,21 @@ export default function Terminal({ onFirstCommand }) {
           </div>
         ))}
         <form onSubmit={handleSubmit} className="input-form">
+          <label htmlFor="terminal-input" className="sr-only">
+            Terminal command input
+          </label>
           <Prompt user={user} host={host} />
           <input
+            id="terminal-input"
             ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             className="terminal-input"
             onFocus={focusInput}
+            autoComplete="off"
+            spellCheck="false"
+            aria-label="Terminal command input"
           />
         </form>
       </main>
