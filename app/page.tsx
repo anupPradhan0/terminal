@@ -13,13 +13,22 @@ export default function Home() {
     setFirstCommandExecuted(true);
   };
 
-  const structuredData = {
-    "@context": "https://morscode.site/",
+  // Structured Data - Person Schema
+  const personSchema = {
+    "@context": "https://schema.org",
     "@type": "Person",
     name: "Anup Pradhan (Mors)",
     jobTitle: "Full Stack Developer",
     description:
       "Full-stack developer specializing in MERN stack and Next.js with backend focus and machine learning exploration",
+    image: "https://www.morscode.site/images/logo.jpg",
+    email: "anuppradhan929@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bhubaneswar",
+      addressRegion: "Odisha",
+      addressCountry: "India",
+    },
     knowsAbout: [
       "MongoDB",
       "Express.js",
@@ -27,43 +36,134 @@ export default function Home() {
       "Node.js",
       "TypeScript",
       "Next.js",
+      "JavaScript",
+      "Python",
       "Machine Learning",
       "TensorFlow",
+      "REST APIs",
+      "Docker",
+      "Git",
+      "Backend Development",
+      "Full Stack Development",
     ],
-    alumniOf: {
-      "@type": "EducationalOrganization",
-      name: "Amity University",
-    },
-    url: "https://morscode.site/",
     sameAs: [
       "https://www.linkedin.com/in/anup-pradhan77",
       "https://github.com/M0rs-Ruki",
       "https://x.com/AnupPradhan0",
+      "https://www.youtube.com/@morscode7",
+      "https://www.instagram.com/mors.365/",
+      "https://leetcode.com/u/Anuppradhan/",
     ],
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: "Amity University",
+      sameAs: "https://www.amity.edu/",
+    },
+    workLocation: {
+      "@type": "Place",
+      name: "Bhubaneswar, Odisha, India",
+    },
+    url: "https://www.morscode.site/",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.morscode.site/",
+    },
+  };
+
+  // Breadcrumb Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.morscode.site",
+      },
+    ],
+  };
+
+  // Website Schema
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Anup Pradhan Portfolio",
+    url: "https://www.morscode.site",
+    description:
+      "Full Stack MERN Developer portfolio showcasing projects, skills, and experience",
+    creator: {
+      "@type": "Person",
+      name: "Anup Pradhan (Mors)",
+    },
   };
 
   return (
     <>
+      {/* Structured Data - Person Schema */}
       <Script
-        id="structured-data"
+        id="person-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        strategy="afterInteractive"
       />
-      <main className="app-shell">
+
+      {/* Breadcrumb Schema */}
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        strategy="afterInteractive"
+      />
+
+      {/* Website Schema */}
+      <Script
+        id="website-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        strategy="afterInteractive"
+      />
+
+      <main className="app-shell" role="main">
         <div className="main-content-area">
+          {/* Identity Card Section */}
           <section
             className={`identity-pane border-2 border-green-400 ${
               firstCommandExecuted ? "hide-on-mobile" : ""
             }`}
-            aria-label="Developer Identity Card"
+            aria-label="Developer Identity Card - Anup Pradhan MERN Stack Developer specializing in backend development and machine learning"
           >
             <IdentityComp />
           </section>
-          <section className="terminal-pane" aria-label="Interactive Terminal">
+
+          {/* Terminal Section */}
+          <section
+            className="terminal-pane"
+            aria-label="Interactive Terminal - Explore skills, projects, and experience with commands"
+          >
             <TerminalComp onFirstCommand={handleFirstCommand} />
           </section>
         </div>
       </main>
+
+      {/* Meta description for SEO - rendered via Next.js Head in layout */}
+      <Script
+        id="seo-meta-tags"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            if (typeof window !== 'undefined') {
+              const metaDescription = document.querySelector('meta[name="description"]');
+              if (!metaDescription) {
+                const meta = document.createElement('meta');
+                meta.name = 'description';
+                meta.content = 'Full Stack MERN Developer from Bhubaneswar, India. Specializing in backend development, RESTful APIs, React, Node.js, MongoDB, TypeScript, and exploring Machine Learning with TensorFlow.';
+                document.head.appendChild(meta);
+              }
+            }
+          `,
+        }}
+      />
     </>
   );
 }
