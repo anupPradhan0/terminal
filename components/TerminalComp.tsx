@@ -88,6 +88,33 @@ const getRemainingRequests = (): number => {
   return Math.max(0, AI_RATE_LIMIT.maxRequests - usage.count);
 };
 
+// ============ Typewriter Text Component ============
+const TypewriterText: React.FC<{ text: string; speed?: number; onComplete?: () => void }> = ({ text, speed = 20, onComplete }) => {
+  const [displayedText, setDisplayedText] = useState<string>("");
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev + text[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
+      }, speed);
+      return () => clearTimeout(timeout);
+    } else if (currentIndex === text.length && onComplete) {
+      onComplete();
+    }
+  }, [currentIndex, text, speed, onComplete]);
+
+  return (
+    <>
+      {displayedText}
+      {currentIndex < text.length && (
+        <span className="animate-pulse text-green-400">|</span>
+      )}
+    </>
+  );
+};
+
 // ============ NEW: AI Response Component with Typewriter ============
 const AIResponse: React.FC<{ text: string }> = ({ text }) => {
   const [displayedText, setDisplayedText] = useState<string>("");
@@ -147,58 +174,38 @@ const OutputLine: React.FC<OutputLineProps> = ({ children }) => (
   <div className="output-line">{children}</div>
 );
 
+// Static data moved outside components to avoid dependency issues
+const HELP_ITEMS: HelpItem[] = [
+  { type: "title", text: "Available commands:" },
+  { type: "command", command: "help", description: "Display this help message." },
+  { type: "command", command: "welcome", description: "Display the welcome message." },
+  { type: "command", command: "about", description: "Learn more about me." },
+  { type: "command", command: "projects", description: "View my recent projects." },
+  { type: "command", command: "skills", description: "See my technical skills." },
+  { type: "command", command: "contact", description: "Get my contact information." },
+  { type: "command", command: "ai <question>", description: "Chat with AI assistant (10 requests/day)." },
+  { type: "command", command: "clear", description: "Clear the terminal screen." },
+  { type: "command", command: "refresh", description: "Reload the page." },
+];
+
+const WELCOME_LINES: string[] = [
+  "Hi, I'm Anup Pradhan (Mors), a Full-Stack Developer.",
+  "Welcome to my interactive portfolio terminal!",
+  "Type 'help' or 'ls' to see available commands.",
+  "✨ NEW: Try 'ai <your question>' to chat with AI assistant!",
+];
+
 const Help: React.FC = () => {
   const [displayedItems, setDisplayedItems] = useState<HelpItem[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
 
-  const helpItems: HelpItem[] = [
-    { type: "title", text: "Available commands:" },
-    {
-      type: "command",
-      command: "help",
-      description: "Display this help message.",
-    },
-    {
-      type: "command",
-      command: "welcome",
-      description: "Display the welcome message.",
-    },
-    { type: "command", command: "about", description: "Learn more about me." },
-    {
-      type: "command",
-      command: "projects",
-      description: "View my recent projects.",
-    },
-    {
-      type: "command",
-      command: "skills",
-      description: "See my technical skills.",
-    },
-    {
-      type: "command",
-      command: "contact",
-      description: "Get my contact information.",
-    },
-    {
-      type: "command",
-      command: "ai <question>",
-      description: "Chat with AI assistant (10 requests/day).",
-    },
-    {
-      type: "command",
-      command: "clear",
-      description: "Clear the terminal screen.",
-    },
-    { type: "command", command: "refresh", description: "Reload the page." },
-  ];
-
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (currentStep < helpItems.length) {
-        setDisplayedItems((prev) => [...prev, helpItems[currentStep]]);
+      if (currentStep < HELP_ITEMS.length) {
+        setDisplayedItems((prev) => [...prev, HELP_ITEMS[currentStep]]);
         setCurrentStep(currentStep + 1);
       }
-    }, 200);
+    }, 120);
     return () => clearTimeout(timer);
   }, [currentStep]);
 
@@ -206,20 +213,20 @@ const Help: React.FC = () => {
     <div className="help-command" role="region" aria-label="Help menu">
       {displayedItems.map((item, i) =>
         item.type === "title" ? (
-          <p key={i}>{item.text}</p>
+          <p key={i}>
+            <TypewriterText text={item.text || ""} speed={20} />
+          </p>
         ) : (
           <ul key={i}>
             <li>
-              <span className="command-name">{item.command}</span> –{" "}
-              {item.description}
+              <span className="command-name">
+                <TypewriterText text={item.command || ""} speed={20} />
+              </span>{" "}
+              –{" "}
+              <TypewriterText text={item.description || ""} speed={20} />
             </li>
           </ul>
         )
-      )}
-      {currentStep < helpItems.length && (
-        <span className="cursor" aria-hidden="true">
-          |
-        </span>
       )}
     </div>
   );
@@ -229,17 +236,10 @@ const Welcome: React.FC = () => {
   const [displayedLines, setDisplayedLines] = useState<string[]>([]);
   const [currentLine, setCurrentLine] = useState<number>(0);
 
-  const welcomeLines: string[] = [
-    "Hi, I'm Anup Pradhan (Mors), a Full-Stack Developer.",
-    "Welcome to my interactive portfolio terminal!",
-    "Type 'help' or 'ls' to see available commands.",
-    "✨ NEW: Try 'ai <your question>' to chat with AI assistant!",
-  ];
-
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (currentLine < welcomeLines.length) {
-        setDisplayedLines((prev) => [...prev, welcomeLines[currentLine]]);
+      if (currentLine < WELCOME_LINES.length) {
+        setDisplayedLines((prev) => [...prev, WELCOME_LINES[currentLine]]);
         setCurrentLine(currentLine + 1);
       }
     }, 400);
@@ -249,13 +249,10 @@ const Welcome: React.FC = () => {
   return (
     <div role="region" aria-label="Welcome message">
       {displayedLines.map((line, i) => (
-        <OutputLine key={i}>{line}</OutputLine>
+        <OutputLine key={i}>
+          <TypewriterText text={line} speed={20} />
+        </OutputLine>
       ))}
-      {currentLine < welcomeLines.length && (
-        <span className="cursor" aria-hidden="true">
-          |
-        </span>
-      )}
     </div>
   );
 };
@@ -302,7 +299,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
     const loadingHist = [...history];
     loadingHist.push({
       type: "output",
-      content: <AILoading key={Date.now()} />,
+      content: <AILoading />,
     });
     setHistory(loadingHist);
 
@@ -327,7 +324,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
 
         newHist.push({
           type: "output",
-          content: <AIResponse key={Date.now()} text={data.response} />,
+          content: <AIResponse text={data.response} />,
         });
         newHist.push({
           type: "output",
@@ -341,7 +338,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       }
 
       setHistory(newHist);
-    } catch (error) {
+    } catch {
       setIsAILoading(false);
       const newHist = [...history];
       newHist.push({
@@ -389,11 +386,11 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
     switch (trimmedCmd.toLowerCase()) {
       case "help":
       case "ls":
-        newHist.push({ type: "output", content: <Help key={Date.now()} /> });
+        newHist.push({ type: "output", content: <Help /> });
         break;
       case "welcome":
       case "cd welcome":
-        newHist.push({ type: "output", content: <Welcome key={Date.now()} /> });
+        newHist.push({ type: "output", content: <Welcome /> });
         break;
       case "about":
       case "cd about":
@@ -462,7 +459,11 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
     if (!isTouchDevice) {
       inputRef.current?.focus();
     }
-    processCommand("welcome", true);
+    // Defer to avoid synchronous setState in effect
+    setTimeout(() => {
+      processCommand("welcome", true);
+    }, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -19,44 +19,6 @@ const CodeIcon: React.FC = () => (
   </svg>
 );
 
-const ServerIcon: React.FC = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-8 h-8 sm:w-10 sm:h-10 mb-2 sm:mb-3 text-green-400 group-hover:text-green-300 transition-all duration-300 group-hover:scale-110"
-  >
-    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-    <line x1="6" y1="6" x2="6.01" y2="6"></line>
-    <line x1="6" y1="18" x2="6.01" y2="18"></line>
-  </svg>
-);
-
-const BrainIcon: React.FC = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="w-8 h-8 sm:w-10 sm:h-10 mb-2 sm:mb-3 text-green-400 group-hover:text-green-300 transition-all duration-300 group-hover:scale-110"
-  >
-    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.9-3.35 2.5 2.5 0 0 1 3.24-2.26 2.5 2.5 0 0 1 2.62-3.33 2.5 2.5 0 0 1 2.62-3.33 2.5 2.5 0 0 1 2.24-1.32Z" />
-    <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.9-3.35 2.5 2.5 0 0 0-3.24-2.26 2.5 2.5 0 0 0-2.62-3.33 2.5 2.5 0 0 0-2.62-3.33 2.5 2.5 0 0 0-2.24-1.32Z" />
-  </svg>
-);
-
 const YoutubeIcon: React.FC = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -115,6 +77,11 @@ const MatrixRain: React.FC = () => {
   const columns =
     typeof window !== "undefined" && window.innerWidth < 768 ? 20 : 50;
 
+  // Generate random delays once on component initialization
+  const [columnDelays] = useState(() =>
+    Array.from({ length: columns }, () => Math.random() * 5)
+  );
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
       {Array.from({ length: columns }).map((_, i) => (
@@ -123,7 +90,7 @@ const MatrixRain: React.FC = () => {
           className="absolute text-green-400 text-xs font-mono"
           style={{
             left: `${(i * 100) / columns}%`,
-            animation: `matrix-fall 10s linear infinite ${Math.random() * 5}s`,
+            animation: `matrix-fall 10s linear infinite ${columnDelays[i]}s`,
           }}
         >
           {Array.from({ length: 20 }).map((_, j) => (
@@ -141,7 +108,10 @@ const About: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -179,7 +149,7 @@ const About: React.FC = () => {
 
             <div className="ml-3 sm:ml-6 border-l-2 border-green-800/30 pl-3 sm:pl-6">
               <p className="text-gray-300 leading-relaxed text-sm sm:text-lg font-light">
-                I'm a{" "}
+                I&apos;m a{" "}
                 <span className="text-green-400 font-semibold">
                   MERN Stack Developer
                 </span>{" "}
@@ -286,7 +256,7 @@ const About: React.FC = () => {
             <div className="flex items-center mb-6 sm:mb-8">
               <span className="text-green-400 font-mono mr-2 sm:mr-4"></span>
               <h2 className="text-lg sm:text-2xl text-green-400 font-bold font-mono tracking-wider">
-                What i'm doing
+                What i&apos;m doing
               </h2>
             </div>
 
@@ -303,7 +273,7 @@ const About: React.FC = () => {
                     Lerning Machine Learning
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
-                    Driven by a deep passion for technology's potential, I am on
+                    Driven by a deep passion for technology&apos;s potential, I am on
                     an exciting and immersive journey into the field of machine
                     learning. My current focus is on building hands-on projects
                     to deepen my understanding of the entire ML pipeline, from
