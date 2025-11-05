@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 
 // Type definitions
 interface SocialLink {
-  icon: () => JSX.Element;
+  icon: () => React.ReactNode;
   name: string;
   href: string;
   color: string;
