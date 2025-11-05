@@ -271,24 +271,35 @@ const SkillBadge: React.FC<SkillBadgeProps> = ({ skill, delay = 0 }) => {
 
 // Matrix-like background effect
 const MatrixBackground: React.FC = () => {
+  // Generate random positions and delays once on component initialization
+  const [particles] = useState(() =>
+    [...Array(20)].map(() => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      animationDelay: Math.random() * 3,
+      animationDuration: 2 + Math.random() * 3,
+      text: Math.random().toString(36).substring(7),
+    }))
+  );
+
   return (
     <div
       className="fixed inset-0 pointer-events-none overflow-hidden opacity-10"
       aria-hidden="true"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 via-black to-emerald-900/20"></div>
-      {[...Array(20)].map((_, i) => (
+      {particles.map((particle, i) => (
         <div
           key={i}
           className="absolute text-green-400 font-mono text-xs animate-pulse"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 3}s`,
-            animationDuration: `${2 + Math.random() * 3}s`,
+            left: `${particle.left}%`,
+            top: `${particle.top}%`,
+            animationDelay: `${particle.animationDelay}s`,
+            animationDuration: `${particle.animationDuration}s`,
           }}
         >
-          {Math.random().toString(36).substring(7)}
+          {particle.text}
         </div>
       ))}
     </div>

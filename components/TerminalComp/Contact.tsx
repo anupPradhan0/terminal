@@ -329,7 +329,7 @@ const Contact: React.FC = () => {
           >
             <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
               <h3 className="text-base sm:text-xl font-mono text-green-400 font-semibold">
-                // Direct.Contact
+                {"//"} Direct.Contact
               </h3>
             </div>
 
@@ -463,7 +463,7 @@ const Contact: React.FC = () => {
           >
             <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
               <h3 className="text-base sm:text-xl font-mono text-green-400 font-semibold">
-                // Social.Links
+                {"//"} Social.Links
               </h3>
             </div>
 
