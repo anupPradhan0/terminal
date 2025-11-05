@@ -162,7 +162,7 @@ export default function About() {
 
               <div className="ml-3 sm:ml-6 border-l-2 border-green-800/30 pl-3 sm:pl-6">
                 <p className="text-gray-300 leading-relaxed text-sm sm:text-lg">
-                  I'm a{" "}
+                  I&apos;m a{" "}
                   <strong className="text-green-400 font-semibold">
                     MERN Stack Developer
                   </strong>{" "}
@@ -283,7 +283,7 @@ export default function About() {
               <div className="flex items-center mb-6 sm:mb-8">
                 <span className="text-green-400 font-mono mr-2 sm:mr-4">$</span>
                 <h2 className="text-lg sm:text-2xl text-green-400 font-bold font-mono">
-                  What I'm Doing
+                  What I&apos;m Doing
                 </h2>
               </div>
 
@@ -297,14 +297,15 @@ export default function About() {
                     Learning Machine Learning
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                    Driven by a deep passion for technology's potential, I am on
-                    an exciting and immersive journey into the field of machine
-                    learning. My current focus is on building hands-on projects
-                    to deepen my understanding of the entire ML pipeline, from
-                    data preprocessing to model deployment. I am mastering
-                    essential tools like scikit-learn and TensorFlow to build
-                    and refine models, with the ultimate goal of creating
-                    elegant and effective solutions to real-world challenges.
+                    Driven by a deep passion for technology&apos;s potential, I
+                    am on an exciting and immersive journey into the field of
+                    machine learning. My current focus is on building hands-on
+                    projects to deepen my understanding of the entire ML
+                    pipeline, from data preprocessing to model deployment. I am
+                    mastering essential tools like scikit-learn and TensorFlow
+                    to build and refine models, with the ultimate goal of
+                    creating elegant and effective solutions to real-world
+                    challenges.
                   </p>
                 </article>
 

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-// SEO Metadata
+// Enhanced SEO Metadata
 export const metadata: Metadata = {
   title: "Contact | Get in Touch with MERN Stack Developer",
   description:
@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     "React Developer Hire",
     "Node.js Developer Contact",
     "Freelance Developer India",
+    "Backend Developer Odisha",
+    "API Development Services",
   ],
   authors: [{ name: "MERN Stack Developer" }],
   openGraph: {
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
       "Let's collaborate on innovative web projects. Available for full-stack development, API development, and machine learning projects.",
     type: "website",
     siteName: "Developer Portfolio",
+    locale: "en_US",
   },
   twitter: {
     card: "summary",
@@ -52,7 +55,7 @@ interface SocialLink {
   color: string;
 }
 
-// SVG Icons as Server Components
+// Simplified SVG Icons
 const MailIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +67,6 @@ const MailIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-green-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <rect width="20" height="16" x="2" y="4" rx="2"></rect>
@@ -83,7 +85,6 @@ const LocationIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-green-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
@@ -102,7 +103,6 @@ const YoutubeIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-red-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
@@ -121,7 +121,6 @@ const TwitterIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-blue-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <path d="M18 6 6 18"></path>
@@ -140,7 +139,6 @@ const InstagramIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-pink-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
@@ -160,7 +158,6 @@ const LinkedinIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-blue-500 group-hover:scale-110"
     aria-hidden="true"
   >
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -180,7 +177,6 @@ const GithubIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-purple-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -198,7 +194,6 @@ const LeetcodeIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-yellow-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <polyline points="4 17 10 11 4 5"></polyline>
@@ -217,7 +212,6 @@ const ResumeIcon = () => (
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="transition-all duration-300 group-hover:stroke-orange-400 group-hover:scale-110"
     aria-hidden="true"
   >
     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -226,7 +220,7 @@ const ResumeIcon = () => (
   </svg>
 );
 
-// JSON-LD Structured Data for SEO
+// Enhanced JSON-LD Structured Data
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -236,7 +230,7 @@ const structuredData = {
     "@type": "PostalAddress",
     addressLocality: "Bhubaneswar",
     addressRegion: "Odisha",
-    addressCountry: "India",
+    addressCountry: "IN",
   },
   sameAs: [
     "https://www.youtube.com/@morscode7",
@@ -249,9 +243,19 @@ const structuredData = {
   jobTitle: "Full Stack Developer",
   description:
     "MERN Stack Developer specializing in full-stack web applications",
+  availability: "Available for hire",
+  workLocation: {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bhubaneswar",
+      addressRegion: "Odisha",
+      addressCountry: "IN",
+    },
+  },
 };
 
-// Main Server Component
+// Main Server Component - Lightweight Version
 export default function Contact() {
   const socialLinks: SocialLink[] = [
     {
@@ -302,14 +306,12 @@ export default function Contact() {
 
       <div className="min-h-screen bg-black text-white flex items-center p-3 sm:p-6">
         <div className="text-white max-w-5xl mx-auto relative w-full">
-          {/* Background gradient effects */}
+          {/* Simplified background */}
           <div className="absolute inset-0" aria-hidden="true">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-cyan-500/10 rounded-3xl blur-xl"></div>
-            <div className="absolute -top-4 -left-4 w-24 h-24 sm:w-32 sm:h-32 bg-green-400/20 rounded-full blur-2xl animate-pulse"></div>
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 sm:w-40 sm:h-40 bg-cyan-400/15 rounded-full blur-2xl animate-pulse"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-cyan-500/10 rounded-3xl"></div>
           </div>
 
-          <article className="relative w-full backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl">
+          <article className="relative w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
             {/* Header with terminal styling */}
             <header className="flex items-center mb-6 sm:mb-8">
               <div
@@ -325,12 +327,12 @@ export default function Contact() {
               </h1>
             </header>
 
-            {/* Terminal cursor animation */}
+            {/* Terminal cursor */}
             <div className="mb-4 sm:mb-6">
               <p className="text-gray-300 font-mono text-xs sm:text-sm leading-relaxed">
                 <span className="text-green-400">&gt;</span> Establishing secure
                 connection...
-                <span className="inline-block w-1.5 h-3 sm:w-2 sm:h-4 bg-green-400 ml-1 animate-pulse"></span>
+                <span className="inline-block w-1.5 h-3 sm:w-2 sm:h-4 bg-green-400 ml-1"></span>
               </p>
               <p className="text-gray-400 font-mono text-xs sm:text-sm mt-1 sm:mt-2">
                 Ready to collaborate on innovative projects and opportunities.
@@ -347,9 +349,9 @@ export default function Contact() {
                 </div>
 
                 {/* Email */}
-                <div className="group relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-green-400/20">
+                <div className="relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl">
                   <div className="flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-green-400/20 to-cyan-400/20 rounded-lg mr-3 sm:mr-4 group-hover:from-green-400/30 group-hover:to-cyan-400/30 transition-all duration-300">
+                    <div className="p-2 bg-green-400/20 rounded-lg mr-3 sm:mr-4">
                       <MailIcon />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -358,7 +360,7 @@ export default function Contact() {
                       </p>
                       <a
                         href="mailto:anuppradhan929@gmail.com"
-                        className="text-white font-mono text-sm sm:text-base group-hover:text-green-400 transition-colors duration-300 block truncate"
+                        className="text-white font-mono text-sm sm:text-base hover:text-green-400 block truncate"
                       >
                         anuppradhan929@gmail.com
                       </a>
@@ -367,16 +369,16 @@ export default function Contact() {
                 </div>
 
                 {/* Location */}
-                <div className="group relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl hover:bg-white/10 hover:border-blue-400/50 transition-all duration-300 transform hover:scale-[1.02]">
+                <div className="relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl">
                   <div className="flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-lg mr-3 sm:mr-4 group-hover:from-blue-400/30 group-hover:to-purple-400/30 transition-all duration-300">
+                    <div className="p-2 bg-blue-400/20 rounded-lg mr-3 sm:mr-4">
                       <LocationIcon />
                     </div>
                     <div>
                       <p className="text-gray-400 text-xs sm:text-sm font-mono">
                         LOCATION
                       </p>
-                      <p className="text-white font-mono text-sm sm:text-base group-hover:text-blue-400 transition-colors duration-300">
+                      <p className="text-white font-mono text-sm sm:text-base">
                         Bhubaneswar, Odisha, India
                       </p>
                     </div>
@@ -388,22 +390,22 @@ export default function Contact() {
                   href="https://drive.google.com/file/d/1s4BHphGSLMZjhUY5IXJbxySOiKFUaaAZ/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl hover:bg-white/10 hover:border-orange-400/50 transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-orange-400/20 active:scale-[0.98] block"
+                  className="relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl hover:border-orange-400/50 block"
                   aria-label="Download resume (opens in new tab)"
                 >
                   <div className="flex items-center">
-                    <div className="p-2 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-lg mr-3 sm:mr-4 group-hover:from-orange-400/30 group-hover:to-red-400/30 transition-all duration-300">
+                    <div className="p-2 bg-orange-400/20 rounded-lg mr-3 sm:mr-4">
                       <ResumeIcon />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-gray-400 text-xs sm:text-sm font-mono">
                         RESUME
                       </p>
-                      <p className="text-white font-mono text-sm sm:text-base group-hover:text-orange-400 transition-colors duration-300">
+                      <p className="text-white font-mono text-sm sm:text-base hover:text-orange-400">
                         Download CV
                       </p>
                     </div>
-                    <div className="text-gray-500 group-hover:text-orange-400 transition-colors duration-300 flex-shrink-0">
+                    <div className="text-gray-500 flex-shrink-0">
                       <svg
                         width="14"
                         height="14"
@@ -439,22 +441,17 @@ export default function Contact() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-lg hover:shadow-green-400/10 active:scale-[0.98]"
+                      className="relative p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl hover:bg-white/10"
                       aria-label={`Visit ${social.name} profile (opens in new tab)`}
                     >
                       <div className="flex items-center space-x-3">
-                        <div
-                          className={`p-2 bg-gradient-to-br from-${social.color}-400/20 to-${social.color}-600/20 rounded-lg group-hover:from-${social.color}-400/30 group-hover:to-${social.color}-600/30 transition-all duration-300`}
-                        >
+                        <div className="p-2 bg-green-400/20 rounded-lg">
                           <social.icon />
                         </div>
-                        <span className="font-mono text-sm sm:text-base group-hover:text-green-400 transition-colors duration-300">
+                        <span className="font-mono text-sm sm:text-base hover:text-green-400">
                           {social.name}
                         </span>
                       </div>
-
-                      {/* Hover effect overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-green-400/0 via-green-400/5 to-green-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg sm:rounded-xl"></div>
                     </a>
                   ))}
                 </nav>
@@ -474,7 +471,7 @@ export default function Contact() {
                   </span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                   <span className="text-gray-400">Online</span>
                 </div>
               </div>

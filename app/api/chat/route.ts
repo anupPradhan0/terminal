@@ -110,12 +110,15 @@ export async function POST(request: NextRequest) {
       response: text,
       success: true,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errMsg =
+      error instanceof Error ? error.message : typeof error === "string" ? error : String(error);
+
     console.error("Gemini Error:", error);
     return NextResponse.json(
       {
         error: "AI temporarily unavailable",
-        details: error.message,
+        details: errMsg,
         success: false,
       },
       { status: 500 }
