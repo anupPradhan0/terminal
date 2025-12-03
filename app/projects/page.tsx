@@ -242,13 +242,20 @@ export default function Projects() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <section className="min-h-screen bg-black text-white pb-16">
+      <section
+        id="projects-section"
+        aria-labelledby="projects-heading"
+        className="min-h-screen bg-black text-white pb-16"
+      >
         <div className="text-white space-y-4 sm:space-y-8 max-w-7xl mx-auto p-3 sm:p-4">
           {/* Header */}
           <header className="flex items-center space-x-2 sm:space-x-4 mb-4 sm:mb-8 pt-6">
             <TerminalIcon />
-            <h1 className="text-lg sm:text-2xl text-green-400 font-bold font-mono tracking-wider">
-              ~/projects
+            <h1
+              id="projects-heading"
+              className="text-lg sm:text-2xl text-green-400 font-bold font-mono tracking-wider"
+            >
+              Projects
             </h1>
             <div className="flex-1 h-px bg-gradient-to-r from-green-400/50 to-transparent"></div>
             <span className="text-green-400/60 text-xs sm:text-sm font-mono">
@@ -259,7 +266,11 @@ export default function Projects() {
           {/* Projects Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
             {projectsData.map((project, index) => (
-              <article key={index} className="relative">
+              <article
+                key={index}
+                className="relative"
+                aria-labelledby={`project-${index}-title`}
+              >
                 {/* Card */}
                 <div className="bg-gray-900/30 border border-green-500/20 rounded-lg sm:rounded-xl overflow-hidden">
                   {/* Terminal header bar */}
@@ -294,7 +305,10 @@ export default function Projects() {
                   {/* Project Content */}
                   <div className="p-4 sm:p-8 space-y-3 sm:space-y-5">
                     <div className="flex items-start justify-between">
-                      <h2 className="font-semibold text-green-400 text-base sm:text-xl mb-2 sm:mb-3 font-mono leading-tight">
+                      <h2
+                        id={`project-${index}-title`}
+                        className="font-semibold text-green-400 text-base sm:text-xl mb-2 sm:mb-3 font-mono leading-tight"
+                      >
                         {project.name}
                       </h2>
                     </div>

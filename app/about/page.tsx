@@ -145,18 +145,25 @@ export default function About() {
         <main className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
           {/* Header */}
           <header className="mb-6 sm:mb-8 border border-green-800 bg-black rounded-lg p-3 sm:p-4">
-            <h1 className="text-green-400 font-mono text-sm sm:text-base">
-              Developer Profile
+            <h1 className="text-green-400 font-mono text-lg sm:text-2xl">
+              About Me
             </h1>
           </header>
 
           <div className="space-y-8 sm:space-y-12">
             {/* About Me Section */}
-            <section className="border border-green-800/30 bg-green-900/5 rounded-xl p-4 sm:p-6 lg:p-8">
+            <section
+              id="about-section"
+              aria-labelledby="about-heading"
+              className="border border-green-800/30 bg-green-900/5 rounded-xl p-4 sm:p-6 lg:p-8"
+            >
               <div className="flex items-center mb-4 sm:mb-6">
                 <span className="text-green-400 font-mono mr-2 sm:mr-4">$</span>
-                <h2 className="text-lg sm:text-2xl text-green-400 font-bold font-mono">
-                  ABOUT_ME
+                <h2
+                  id="about-heading"
+                  className="text-lg sm:text-2xl text-green-400 font-bold font-mono"
+                >
+                  About Me
                 </h2>
               </div>
 
@@ -205,19 +212,32 @@ export default function About() {
             </section>
 
             {/* Education Section */}
-            <section className="border border-green-800/30 bg-green-900/5 rounded-xl p-4 sm:p-6 lg:p-8">
+            <section
+              id="education-section"
+              aria-labelledby="education-heading"
+              className="border border-green-800/30 bg-green-900/5 rounded-xl p-4 sm:p-6 lg:p-8"
+            >
               <div className="flex items-center mb-4 sm:mb-6">
                 <span className="text-green-400 font-mono mr-2 sm:mr-4">$</span>
-                <h2 className="text-lg sm:text-2xl text-green-400 font-bold font-mono">
-                  EDUCATION
+                <h2
+                  id="education-heading"
+                  className="text-lg sm:text-2xl text-green-400 font-bold font-mono"
+                >
+                  Education
                 </h2>
               </div>
 
               <div className="ml-3 sm:ml-6 border-l-2 border-green-800/30 pl-3 sm:pl-6 space-y-6">
                 {/* Amity University */}
-                <article className="border-b border-green-800/20 pb-4">
+                <article
+                  className="border-b border-green-800/20 pb-4"
+                  aria-labelledby="amity-heading"
+                >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                    <h3 className="text-green-400 font-semibold text-base sm:text-lg font-mono">
+                    <h3
+                      id="amity-heading"
+                      className="text-green-400 font-semibold text-base sm:text-lg font-mono"
+                    >
                       Amity University
                     </h3>
                     <time
@@ -239,9 +259,15 @@ export default function About() {
                 </article>
 
                 {/* Autonomous College Khariar */}
-                <article className="border-b border-green-800/20 pb-4">
+                <article
+                  className="border-b border-green-800/20 pb-4"
+                  aria-labelledby="ack-heading"
+                >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                    <h3 className="text-green-400 font-semibold text-base sm:text-lg font-mono">
+                    <h3
+                      id="ack-heading"
+                      className="text-green-400 font-semibold text-base sm:text-lg font-mono"
+                    >
                       Autonomous College Khariar
                     </h3>
                     <time
@@ -258,9 +284,12 @@ export default function About() {
                 </article>
 
                 {/* High School */}
-                <article>
+                <article aria-labelledby="highschool-heading">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                    <h3 className="text-green-400 font-semibold text-base sm:text-lg font-mono">
+                    <h3
+                      id="highschool-heading"
+                      className="text-green-400 font-semibold text-base sm:text-lg font-mono"
+                    >
                       High School
                     </h3>
                     <time
@@ -279,10 +308,13 @@ export default function About() {
             </section>
 
             {/* Skills Section */}
-            <section>
+            <section id="skills-section" aria-labelledby="skills-heading">
               <div className="flex items-center mb-6 sm:mb-8">
                 <span className="text-green-400 font-mono mr-2 sm:mr-4">$</span>
-                <h2 className="text-lg sm:text-2xl text-green-400 font-bold font-mono">
+                <h2
+                  id="skills-heading"
+                  className="text-lg sm:text-2xl text-green-400 font-bold font-mono"
+                >
                   What I&apos;m Doing
                 </h2>
               </div>

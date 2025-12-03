@@ -311,7 +311,10 @@ export default function Contact() {
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-transparent to-cyan-500/10 rounded-3xl"></div>
           </div>
 
-          <article className="relative w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8">
+          <article
+            className="relative w-full bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8"
+            aria-labelledby="contact-heading"
+          >
             {/* Header with terminal styling */}
             <header className="flex items-center mb-6 sm:mb-8">
               <div
@@ -322,8 +325,11 @@ export default function Contact() {
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
               </div>
-              <h1 className="text-lg sm:text-2xl font-mono text-green-400 font-bold tracking-wider">
-                <span className="text-gray-500">$</span> contact --connect
+              <h1
+                id="contact-heading"
+                className="text-lg sm:text-2xl font-mono text-green-400 font-bold tracking-wider"
+              >
+                <span className="text-gray-500">$</span> Contact
               </h1>
             </header>
 
@@ -341,10 +347,17 @@ export default function Contact() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
               {/* Direct Contact Section */}
-              <section className="space-y-4 sm:space-y-6">
+              <section
+                id="direct-contact"
+                aria-labelledby="direct-contact-heading"
+                className="space-y-4 sm:space-y-6"
+              >
                 <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
-                  <h2 className="text-base sm:text-xl font-mono text-green-400 font-semibold">
-                    {"// Direct.Contact"}
+                  <h2
+                    id="direct-contact-heading"
+                    className="text-base sm:text-xl font-mono text-green-400 font-semibold"
+                  >
+                    Direct Contact
                   </h2>
                 </div>
 
@@ -424,10 +437,17 @@ export default function Contact() {
               </section>
 
               {/* Social Links Section */}
-              <section className="space-y-4 sm:space-y-6">
+              <section
+                id="social-links"
+                aria-labelledby="social-links-heading"
+                className="space-y-4 sm:space-y-6"
+              >
                 <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
-                  <h2 className="text-base sm:text-xl font-mono text-green-400 font-semibold">
-                    {"// Social.Links"}
+                  <h2
+                    id="social-links-heading"
+                    className="text-base sm:text-xl font-mono text-green-400 font-semibold"
+                  >
+                    Social Links
                   </h2>
                 </div>
 

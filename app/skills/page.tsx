@@ -319,7 +319,11 @@ export default function Skills() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <section className="relative min-h-screen bg-black p-6 pb-16">
+      <section
+        id="skills-section"
+        aria-labelledby="skills-heading"
+        className="relative min-h-screen bg-black p-6 pb-16"
+      >
         {/* Background effect */}
         <div
           className="fixed inset-0 pointer-events-none overflow-hidden opacity-10"
@@ -331,9 +335,12 @@ export default function Skills() {
         <div className="relative z-10 max-w-7xl mx-auto">
           {/* Header */}
           <header className="text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold font-mono">
+            <h1
+              id="skills-heading"
+              className="text-4xl md:text-6xl font-bold font-mono"
+            >
               <span className="text-green-400">&lt;</span>
-              <span className="text-white"> TECH STACK </span>
+              <span className="text-white"> Skills & Tech Stack </span>
               <span className="text-green-400">/&gt;</span>
             </h1>
             <div className="mt-4 text-green-300/80 font-mono">
