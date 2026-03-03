@@ -2,7 +2,7 @@
 
 A modern, interactive terminal-themed portfolio website built with Next.js 16, React 19, TypeScript, and Tailwind CSS. Features a unique terminal interface with matrix-style animations and AI-powered chat functionality.
 
-[![Live Demo](https://img.shields.io/badge/demo-live-green.svg)](https://www.morscode.site/)
+[![Live Demo](https://img.shields.io/badge/demo-live-green.svg)](https://www.anuppradhan.in/)
 [![Next.js](https://img.shields.io/badge/Next.js-16.0-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2-blue)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
@@ -22,7 +22,7 @@ A modern, interactive terminal-themed portfolio website built with Next.js 16, R
 
 ## 🚀 Live Demo
 
-Visit the live site: [Your Vercel URL](https://www.morscode.site/)
+Visit the live site: [Your Vercel URL](https://www.anuppradhan.in/)
 
 ## 📸 Screenshots
 
@@ -104,7 +104,7 @@ terminal/
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/M0rs-Ruki/terminal.git
+git clone https://github.com/anupPradhan0/terminal.git
 cd terminal
 ```
 
@@ -211,7 +211,7 @@ This project is deployed on **Vercel** for optimal performance and seamless CI/C
 
 ### Deploy Your Own
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/M0rs-Ruki/terminal)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/anupPradhan0/terminal)
 
 ### Manual Deployment
 
@@ -264,7 +264,7 @@ vercel
 
 ## 🤝 Connect With Me
 
-- **GitHub**: [@M0rs-Ruki](https://github.com/M0rs-Ruki)
+- **GitHub**: [@anupPradhan0](https://github.com/anupPradhan0)
 - **LinkedIn**: [Anup Pradhan](https://www.linkedin.com/in/anup-pradhan77)
 - **Twitter/X**: [@AnupPradhan0](https://x.com/AnupPradhan0)
 - **YouTube**: [@morscode7](https://www.youtube.com/@morscode7)
@@ -293,7 +293,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🐛 Bug Reports
 
-Found a bug? Please open an issue on [GitHub Issues](https://github.com/M0rs-Ruki/terminal/issues).
+Found a bug? Please open an issue on [GitHub Issues](https://github.com/anupPradhan0/terminal/issues).
 
 ## ⭐ Show Your Support
 
@@ -301,6 +301,6 @@ If you like this project, please consider giving it a ⭐ on GitHub!
 
 ---
 
-**Built with 💚 by [Anup Pradhan](https://github.com/M0rs-Ruki)**
+**Built with 💚 by [Anup Pradhan](https://github.com/anupPradhan0)**
 
 _Last Updated: November 2025_

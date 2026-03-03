@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 // Enhanced SEO Metadata
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.morscode.site"),
+  metadataBase: new URL("https://www.anuppradhan.in"),
   title: "About Me | MERN Stack Developer & Machine Learning Enthusiast",
   description:
     "Experienced MERN Stack Developer from Bhubaneswar, India specializing in backend development, RESTful APIs, MongoDB, Express.js, React, Node.js, and TypeScript. Currently expanding skills in Machine Learning with TensorFlow and scikit-learn. Building production-ready applications with JWT authentication and cloud deployment. Pursuing BCA at Amity University with CGPA 8.96.",
@@ -33,20 +33,20 @@ export const metadata: Metadata = {
     "Developer Portfolio",
     "Freelance Developer",
   ],
-  authors: [{ name: "Anup Pradhan (Mors)", url: "https://www.morscode.site" }],
-  creator: "Anup Pradhan (Mors)",
-  publisher: "Anup Pradhan (Mors)",
+  authors: [{ name: "Anup Pradhan", url: "https://www.anuppradhan.in" }],
+  creator: "Anup Pradhan",
+  publisher: "Anup Pradhan",
   openGraph: {
     title: "About Me | MERN Stack Developer & Machine Learning Enthusiast",
     description:
       "MERN Stack Developer from Bhubaneswar, India specializing in backend development, RESTful APIs, and full-stack applications. Learning Machine Learning and sharing my journey through content creation. Pursuing BCA at Amity University.",
     type: "profile",
-    url: "https://www.morscode.site/about",
-    siteName: "Anup Pradhan (Mors) - Developer Portfolio",
+    url: "https://www.anuppradhan.in/about",
+    siteName: "Anup Pradhan - Developer Portfolio",
     locale: "en_IN",
     images: [
       {
-        url: "https://www.morscode.site/images/logo.jpg",
+        url: "https://www.anuppradhan.in/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Anup Pradhan - MERN Stack Developer & Machine Learning Enthusiast",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: "About Me | MERN Stack Developer & Machine Learning Enthusiast",
     description:
       "Full-stack MERN developer from Bhubaneswar, India focused on backend development and machine learning. Pursuing BCA at Amity University.",
-    images: ["https://www.morscode.site/images/logo.jpg"],
+    images: ["https://www.anuppradhan.in/images/logo.jpg"],
   },
   robots: {
     index: true,
@@ -76,9 +76,9 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.morscode.site/about",
+    canonical: "https://www.anuppradhan.in/about",
     languages: {
-      en: "https://www.morscode.site/about",
+      en: "https://www.anuppradhan.in/about",
     },
   },
   category: "Technology",
@@ -127,9 +127,8 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Anup Pradhan",
-  alternateName: "Mors",
-  url: "https://www.morscode.site",
-  image: "https://www.morscode.site/images/logo.jpg",
+  url: "https://www.anuppradhan.in",
+  image: "https://www.anuppradhan.in/images/logo.jpg",
   jobTitle: "Full Stack MERN Developer",
   description:
     "MERN Stack Developer from Bhubaneswar, India specializing in backend development, RESTful APIs, and machine learning. Currently pursuing BCA at Amity University.",
@@ -198,13 +197,13 @@ const breadcrumbStructuredData = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://www.morscode.site",
+      item: "https://www.anuppradhan.in",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "About",
-      item: "https://www.morscode.site/about",
+      item: "https://www.anuppradhan.in/about",
     },
   ],
 };

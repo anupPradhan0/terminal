@@ -246,7 +246,7 @@ const Contact: React.FC = () => {
     {
       icon: GithubIcon,
       name: "GitHub",
-      href: "https://github.com/M0rs-Ruki",
+      href: "https://github.com/anupPradhan0",
       color: "purple",
     },
     {

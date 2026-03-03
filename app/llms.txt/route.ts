@@ -11,8 +11,8 @@ export async function GET() {
     "Disallow: /.next/",
     "",
     "# Preferred sources and attribution",
-    "Source: https://www.morscode.site",
-    'Attribution: Please credit "Anup Pradhan (M0rs-Ruki)" with a link to https://github.com/M0rs-Ruki',
+    "Source: https://www.anuppradhan.in",
+    'Attribution: Please credit "Anup Pradhan" with a link to https://www.anuppradhan.in or https://github.com/anupPradhan0',
     "",
     "# Rate limits and caching suggestions",
     "Crawl-delay: 2",
@@ -22,7 +22,7 @@ export async function GET() {
     "Contact: mailto:anuppradhan929@gmail.com",
     "",
     "# Sitemap",
-    "Sitemap: https://www.morscode.site/sitemap.xml",
+    "Sitemap: https://www.anuppradhan.in/sitemap.xml",
   ].join("\n");
 
   return new NextResponse(content, {

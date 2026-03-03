@@ -2,10 +2,10 @@ import { Metadata } from "next";
 
 // Enhanced SEO Metadata
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.morscode.site"),
+  metadataBase: new URL("https://www.anuppradhan.in"),
   title: "Contact | Get in Touch with MERN Stack Developer",
   description:
-    "Connect with Anup Pradhan (Mors) for collaboration opportunities, project inquiries, and technical discussions. MERN stack developer based in Bhubaneswar, Odisha, India. Available for full-stack development projects, API development, and machine learning collaborations. Response time less than 24 hours.",
+    "Connect with Anup Pradhan for collaboration opportunities, project inquiries, and technical discussions. MERN stack developer based in Bhubaneswar, Odisha, India. Available for full-stack development projects, API development, and machine learning collaborations. Response time less than 24 hours.",
   keywords: [
     "Contact MERN Developer",
     "Hire Full Stack Developer",
@@ -24,20 +24,20 @@ export const metadata: Metadata = {
     "Machine Learning Developer Contact",
     "Developer Portfolio Contact",
   ],
-  authors: [{ name: "Anup Pradhan (Mors)", url: "https://www.morscode.site" }],
-  creator: "Anup Pradhan (Mors)",
-  publisher: "Anup Pradhan (Mors)",
+  authors: [{ name: "Anup Pradhan", url: "https://www.anuppradhan.in" }],
+  creator: "Anup Pradhan",
+  publisher: "Anup Pradhan",
   openGraph: {
     title: "Contact | Get in Touch with MERN Stack Developer",
     description:
-      "Connect with Anup Pradhan (Mors) for collaboration opportunities. Available for full-stack development, API development, and machine learning projects. Based in Bhubaneswar, Odisha, India.",
+      "Connect with Anup Pradhan for collaboration opportunities. Available for full-stack development, API development, and machine learning projects. Based in Bhubaneswar, Odisha, India.",
     type: "website",
-    url: "https://www.morscode.site/contact",
-    siteName: "Anup Pradhan (Mors) - Developer Portfolio",
+    url: "https://www.anuppradhan.in/contact",
+    siteName: "Anup Pradhan - Developer Portfolio",
     locale: "en_IN",
     images: [
       {
-        url: "https://www.morscode.site/images/logo.jpg",
+        url: "https://www.anuppradhan.in/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Anup Pradhan - Contact MERN Stack Developer",
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     creator: "@AnupPradhan0",
     title: "Contact | Get in Touch with MERN Stack Developer",
     description:
-      "Connect with Anup Pradhan (Mors) for project collaborations and development opportunities. Available for hire.",
-    images: ["https://www.morscode.site/images/logo.jpg"],
+      "Connect with Anup Pradhan for project collaborations and development opportunities. Available for hire.",
+    images: ["https://www.anuppradhan.in/images/logo.jpg"],
   },
   robots: {
     index: true,
@@ -67,9 +67,9 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.morscode.site/contact",
+    canonical: "https://www.anuppradhan.in/contact",
     languages: {
-      en: "https://www.morscode.site/contact",
+      en: "https://www.anuppradhan.in/contact",
     },
   },
   category: "Technology",
@@ -254,9 +254,8 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Anup Pradhan",
-  alternateName: "Mors",
-  url: "https://www.morscode.site",
-  image: "https://www.morscode.site/images/logo.jpg",
+  url: "https://www.anuppradhan.in",
+  image: "https://www.anuppradhan.in/images/logo.jpg",
   email: "anuppradhan929@gmail.com",
   address: {
     "@type": "PostalAddress",
@@ -269,7 +268,7 @@ const structuredData = {
     "https://x.com/AnupPradhan0",
     "https://www.instagram.com/mors.365/",
     "https://www.linkedin.com/in/anup-pradhan77",
-    "https://github.com/M0rs-Ruki",
+    "https://github.com/anupPradhan0",
     "https://leetcode.com/u/Anuppradhan/",
   ],
   jobTitle: "Full Stack MERN Developer",
@@ -303,13 +302,13 @@ const breadcrumbStructuredData = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://www.morscode.site",
+      item: "https://www.anuppradhan.in",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Contact",
-      item: "https://www.morscode.site/contact",
+      item: "https://www.anuppradhan.in/contact",
     },
   ],
 };
@@ -344,7 +343,7 @@ export default function Contact() {
     {
       icon: GithubIcon,
       name: "GitHub",
-      href: "https://github.com/M0rs-Ruki",
+      href: "https://github.com/anupPradhan0",
       color: "purple",
     },
     {

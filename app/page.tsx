@@ -17,11 +17,11 @@ export default function Home() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Anup Pradhan (Mors)",
+    name: "Anup Pradhan",
     jobTitle: "Full Stack Developer",
     description:
       "Full-stack developer specializing in MERN stack and Next.js with backend focus and machine learning exploration",
-    image: "https://www.morscode.site/images/logo.jpg",
+    image: "https://www.anuppradhan.in/images/logo.jpg",
     email: "anuppradhan929@gmail.com",
     address: {
       "@type": "PostalAddress",
@@ -48,7 +48,7 @@ export default function Home() {
     ],
     sameAs: [
       "https://www.linkedin.com/in/anup-pradhan77",
-      "https://github.com/M0rs-Ruki",
+      "https://github.com/anupPradhan0",
       "https://x.com/AnupPradhan0",
       "https://www.youtube.com/@morscode7",
       "https://www.instagram.com/mors.365/",
@@ -63,10 +63,10 @@ export default function Home() {
       "@type": "Place",
       name: "Bhubaneswar, Odisha, India",
     },
-    url: "https://www.morscode.site/",
+    url: "https://www.anuppradhan.in/",
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": "https://www.morscode.site/",
+      "@id": "https://www.anuppradhan.in/",
     },
   };
 
@@ -79,7 +79,7 @@ export default function Home() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.morscode.site",
+        item: "https://www.anuppradhan.in",
       },
     ],
   };
@@ -89,12 +89,12 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Anup Pradhan Portfolio",
-    url: "https://www.morscode.site",
+    url: "https://www.anuppradhan.in",
     description:
       "Full Stack MERN Developer portfolio showcasing projects, skills, and experience",
     creator: {
       "@type": "Person",
-      name: "Anup Pradhan (Mors)",
+      name: "Anup Pradhan",
     },
   };
 

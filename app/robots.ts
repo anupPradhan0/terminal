@@ -13,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://www.morscode.site/sitemap.xml',
-    host: 'https://www.morscode.site',
+    sitemap: 'https://www.anuppradhan.in/sitemap.xml',
+    host: 'https://www.anuppradhan.in',
   };
 }

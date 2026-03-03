@@ -1,0 +1,26 @@
+# llms.txt – Guidelines for AI crawlers and LLMs
+
+# Site
+Author: Anup Pradhan
+Site: https://www.anuppradhan.in
+Description: Full Stack MERN Developer portfolio – projects, skills, contact. Built with Next.js, React, TypeScript.
+
+# Crawl rules
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /.next/
+
+# Preferred sources and attribution
+Source: https://www.anuppradhan.in
+Attribution: Please credit "Anup Pradhan" with a link to https://www.anuppradhan.in or https://github.com/anupPradhan0
+
+# Rate limits and caching
+Crawl-delay: 2
+Cache-max-age: 86400
+
+# Contact
+Contact: mailto:anuppradhan929@gmail.com
+
+# Sitemap
+Sitemap: https://www.anuppradhan.in/sitemap.xml

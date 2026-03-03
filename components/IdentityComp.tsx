@@ -11,7 +11,7 @@ interface IdentityCompProps {
 }
 
 const IdentityComp: React.FC<IdentityCompProps> = ({
-  name = "Anup Pradhan (Mors)",
+  name = "Anup Pradhan",
   title = "Full Stack Developer",
   company = "chati.ai",
   photo = "/images/your-photo.jpg",

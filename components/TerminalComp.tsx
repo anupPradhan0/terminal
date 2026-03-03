@@ -189,7 +189,7 @@ const HELP_ITEMS: HelpItem[] = [
 ];
 
 const WELCOME_LINES: string[] = [
-  "Hi, I'm Anup Pradhan (Mors), a Full-Stack Developer.",
+  "Hi, I'm Anup Pradhan, a Full-Stack Developer.",
   "Welcome to my interactive portfolio terminal!",
   "Type 'help' or 'ls' to see available commands.",
   "✨ NEW: Try 'ai <your question>' to chat with AI assistant!",
@@ -265,7 +265,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const user = "mors";
+  const user = "anup";
   const host = "ruki";
 
   // ============ NEW: AI Command Handler ============

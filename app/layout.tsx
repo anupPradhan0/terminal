@@ -15,15 +15,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.morscode.site"),
+  metadataBase: new URL("https://www.anuppradhan.in"),
   icons: {
     icon: "/images/logo.jpg",
     apple: "/images/logo.jpg",
   },
   title: {
     default:
-      "Anup Pradhan (Mors) | Full Stack MERN Developer & Machine Learning Enthusiast",
-    template: "%s | Anup Pradhan (Mors)",
+      "Anup Pradhan | Full Stack MERN Developer & Machine Learning Enthusiast",
+    template: "%s | Anup Pradhan",
   },
   description:
     "MERN Stack Developer from Bhubaneswar, India specializing in backend development, RESTful APIs, and full-stack applications using MongoDB, Express.js, React, Next.js, Node.js, and TypeScript. Currently learning Machine Learning with TensorFlow and scikit-learn.",
@@ -47,8 +47,8 @@ export const metadata: Metadata = {
     "Developer Portfolio",
     "Freelance Developer",
   ],
-  authors: [{ name: "Anup Pradhan (Mors)", url: "https://www.morscode.site" }],
-  creator: "Anup Pradhan (Mors)",
+  authors: [{ name: "Anup Pradhan", url: "https://www.anuppradhan.in" }],
+  creator: "Anup Pradhan",
   formatDetection: {
     email: true,
     telephone: true,
@@ -56,14 +56,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://www.morscode.site",
-    siteName: "Anup Pradhan (Mors) - Developer Portfolio",
-    title: "Anup Pradhan (Mors) | Full Stack MERN Developer",
+    url: "https://www.anuppradhan.in",
+    siteName: "Anup Pradhan - Developer Portfolio",
+    title: "Anup Pradhan | Full Stack MERN Developer",
     description:
       "Full Stack MERN Developer specializing in backend development, RESTful APIs, and Machine Learning. Based in Bhubaneswar, Odisha, India.",
     images: [
       {
-        url: "https://www.morscode.site/images/logo.jpg",
+        url: "https://www.anuppradhan.in/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Anup Pradhan - Full Stack Developer",
@@ -75,10 +75,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@AnupPradhan0",
     creator: "@AnupPradhan0",
-    title: "Anup Pradhan (Mors) | Full Stack MERN Developer",
+    title: "Anup Pradhan | Full Stack MERN Developer",
     description:
       "MERN Stack Developer with backend focus, building RESTful APIs and full-stack applications. Learning Machine Learning.",
-    images: ["https://www.morscode.site/images/logo.jpg"],
+    images: ["https://www.anuppradhan.in/images/logo.jpg"],
   },
   robots: {
     index: true,
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.morscode.site",
+    canonical: "https://www.anuppradhan.in",
   },
   verification: {
     google: "your-google-verification-code",
@@ -117,10 +117,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="application-name" content="Anup Pradhan - Developer" />
-        <meta name="apple-mobile-web-app-title" content="Mors Dev" />
+        <meta name="apple-mobile-web-app-title" content="Anup Dev" />
         <link rel="icon" href="/images/logo.jpg" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="canonical" href="https://www.morscode.site" />
+        <link rel="canonical" href="https://www.anuppradhan.in" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

@@ -5,17 +5,17 @@ const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey || "");
 
 const CONTEXT_PARTS = {
-  base: `You are Mors's AI assistant. Answer concisely (2-3 sentences). Mors (Anup Pradhan) is a Full-Stack MERN Developer with Next.js, BCA student at Amity University (CGPA: 8.96).`,
+  base: `You are Anup's AI assistant. Answer concisely (2-3 sentences). Anup Pradhan is a Full-Stack MERN Developer with Next.js, BCA student at Amity University (CGPA: 8.96).`,
 
   skills: `Tech Stack: JavaScript/TypeScript, Python, React, Next.js, Node.js, Express, MongoDB, Tailwind, Docker, Git, TensorFlow, Cohere AI.`,
 
   projects: `Key Projects:
-1. WhatsApp Campaign (MERN+TS, admin system) - github.com/M0rs-Ruki/WhatsApp-Campaigner
+1. WhatsApp Campaign (MERN+TS, admin system) - github.com/anupPradhan0/WhatsApp-Campaigner
 2. RukiAI (AI finance tracker) - rukiai.online
 3. Neural Network from scratch (Python/NumPy)
 Type 'projects' to see all.`,
 
-  contact: `Contact: anuppradhan929@gmail.com | GitHub: M0rs-Ruki | LinkedIn: anup-pradhan77 | Bhubaneswar, India. Type 'contact' for full info.`,
+  contact: `Contact: anuppradhan929@gmail.com | GitHub: anupPradhan0 | LinkedIn: anup-pradhan77 | Bhubaneswar, India. Type 'contact' for full info.`,
 
   education: `Education: BCA at Amity University (2024-27, CGPA 8.96), I.T. at Autonomous College Khariar (2022-24).`,
 };
@@ -62,7 +62,7 @@ function getRelevantContext(question: string): string {
 
   if (
     q.includes("who") ||
-    q.includes("about mors") ||
+    q.includes("about anup") ||
     q.includes("tell me about")
   ) {
     context += "\n" + CONTEXT_PARTS.skills + "\n" + CONTEXT_PARTS.projects;

@@ -3,10 +3,10 @@ import type { ReactNode } from "react";
 
 // Enhanced SEO Metadata
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.morscode.site"),
+  metadataBase: new URL("https://www.anuppradhan.in"),
   title: "Skills & Tech Stack | MERN Stack Developer",
   description:
-    "Comprehensive technical skills of Anup Pradhan (Mors) including JavaScript, TypeScript, Python, React, Node.js, MongoDB, Express, Next.js, Docker, TensorFlow, and modern web development tools. Full-stack MERN developer from Bhubaneswar, India with AI/ML capabilities.",
+    "Comprehensive technical skills of Anup Pradhan including JavaScript, TypeScript, Python, React, Node.js, MongoDB, Express, Next.js, Docker, TensorFlow, and modern web development tools. Full-stack MERN developer from Bhubaneswar, India with AI/ML capabilities.",
   keywords: [
     "MERN Stack Skills",
     "JavaScript Developer",
@@ -29,20 +29,20 @@ export const metadata: Metadata = {
     "AI ML Developer",
     "Machine Learning Skills",
   ],
-  authors: [{ name: "Anup Pradhan (Mors)", url: "https://www.morscode.site" }],
-  creator: "Anup Pradhan (Mors)",
-  publisher: "Anup Pradhan (Mors)",
+  authors: [{ name: "Anup Pradhan", url: "https://www.anuppradhan.in" }],
+  creator: "Anup Pradhan",
+  publisher: "Anup Pradhan",
   openGraph: {
     title: "Skills & Tech Stack | MERN Stack Developer",
     description:
       "Expert in MERN stack, TypeScript, Python, AI/ML tools, and modern web development technologies. Full-stack developer from Bhubaneswar, India.",
     type: "website",
-    url: "https://www.morscode.site/skills",
-    siteName: "Anup Pradhan (Mors) - Developer Portfolio",
+    url: "https://www.anuppradhan.in/skills",
+    siteName: "Anup Pradhan - Developer Portfolio",
     locale: "en_IN",
     images: [
       {
-        url: "https://www.morscode.site/images/logo.jpg",
+        url: "https://www.anuppradhan.in/images/logo.jpg",
         width: 1200,
         height: 630,
         alt: "Anup Pradhan - Skills & Tech Stack",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     title: "Skills & Tech Stack | MERN Stack Developer",
     description:
       "Full-stack expertise in MERN, TypeScript, Python, and machine learning. Comprehensive technical skills portfolio.",
-    images: ["https://www.morscode.site/images/logo.jpg"],
+    images: ["https://www.anuppradhan.in/images/logo.jpg"],
   },
   robots: {
     index: true,
@@ -72,9 +72,9 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.morscode.site/skills",
+    canonical: "https://www.anuppradhan.in/skills",
     languages: {
-      en: "https://www.morscode.site/skills",
+      en: "https://www.anuppradhan.in/skills",
     },
   },
   category: "Technology",
@@ -191,9 +191,8 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Anup Pradhan",
-  alternateName: "Mors",
-  url: "https://www.morscode.site",
-  image: "https://www.morscode.site/images/logo.jpg",
+  url: "https://www.anuppradhan.in",
+  image: "https://www.anuppradhan.in/images/logo.jpg",
   knowsAbout: [
     ...skillsData.languages,
     ...skillsData.frontend,
@@ -239,13 +238,13 @@ const breadcrumbStructuredData = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://www.morscode.site",
+      item: "https://www.anuppradhan.in",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Skills",
-      item: "https://www.morscode.site/skills",
+      item: "https://www.anuppradhan.in/skills",
     },
   ],
 };
