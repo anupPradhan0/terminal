@@ -523,6 +523,25 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.ctrlKey && e.key === "l") {
+      e.preventDefault();
+      setHistory([]);
+      setHistoryIndex(-1);
+      return;
+    }
+    if (e.ctrlKey && e.key === "c") {
+      e.preventDefault();
+      if (input) {
+        setHistory((prev) => [
+          ...prev,
+          { type: "prompt", command: input },
+          { type: "output", content: "^C" },
+        ]);
+      }
+      setInput("");
+      setHistoryIndex(-1);
+      return;
+    }
     if (e.key === "ArrowUp") {
       e.preventDefault();
       if (commandHistory.length === 0) return;
