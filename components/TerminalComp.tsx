@@ -179,12 +179,14 @@ const OutputLine: React.FC<OutputLineProps> = ({ children }) => (
 const HELP_ITEMS: HelpItem[] = [
   { type: "title", text: "Available commands:" },
   { type: "command", command: "help", description: "Display this help message." },
-  { type: "command", command: "welcome", description: "Display the welcome message." },
-  { type: "command", command: "about", description: "Learn more about me." },
-  { type: "command", command: "projects", description: "View my recent projects." },
-  { type: "command", command: "skills", description: "See my technical skills." },
-  { type: "command", command: "experience", description: "View my professional experience." },
-  { type: "command", command: "contact", description: "Get my contact information." },
+  { type: "command", command: "ls", description: "List available commands (same as help)." },
+  { type: "command", command: "cd <name>", description: "Open a section (e.g. cd about, cd projects)." },
+  { type: "command", command: "cd welcome", description: "Display the welcome message." },
+  { type: "command", command: "cd about", description: "Learn more about me." },
+  { type: "command", command: "cd projects", description: "View my recent projects." },
+  { type: "command", command: "cd skills", description: "See my technical skills." },
+  { type: "command", command: "cd experience", description: "View my professional experience." },
+  { type: "command", command: "cd contact", description: "Get my contact information." },
   { type: "command", command: "ai <question>", description: "Chat with AI assistant (10 requests/day)." },
   { type: "command", command: "clear", description: "Clear the terminal screen." },
   { type: "command", command: "refresh", description: "Reload the page." },
@@ -193,7 +195,7 @@ const HELP_ITEMS: HelpItem[] = [
 const WELCOME_LINES: string[] = [
   "Hi, I'm Anup Pradhan, a Software Developer.",
   "Welcome to my interactive portfolio terminal!",
-  "Type 'help' or 'ls' to see available commands.",
+  "Type 'help' or 'ls' for commands. Use 'cd <name>' to open sections (e.g. cd about, cd projects).",
   "✨ NEW: Try 'ai <your question>' to chat with AI assistant!",
 ];
 
@@ -390,42 +392,34 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       case "ls":
         newHist.push({ type: "output", content: <Help /> });
         break;
-      case "welcome":
       case "cd welcome":
         newHist.push({ type: "output", content: <Welcome /> });
         break;
-      case "about":
       case "cd about":
         newHist.push({ type: "output", content: <About /> });
         break;
-      case "projects":
       case "cd projects":
         newHist.push({ type: "output", content: <Projects /> });
         break;
-      case "skills":
       case "cd skills":
         newHist.push({ type: "output", content: <Skills /> });
         break;
-      case "experience":
       case "cd experience":
         newHist.push({ type: "output", content: <Experience /> });
         break;
-      case "contact":
       case "cd contact":
         newHist.push({ type: "output", content: <Contact /> });
         break;
       case "clear":
-      case "cd clear":
         setHistory([]);
         return;
       case "refresh":
-      case "cd refresh":
         window.location.reload();
         return;
       default:
         newHist.push({
           type: "output",
-          content: `Command not found: ${cmd}. Type 'help' or 'ls' for a list of commands.`,
+          content: `Command not found: ${cmd}. Type 'help' or 'ls' for commands. Use 'cd <name>' to open sections (e.g. cd about, cd projects).`,
         });
         break;
     }
@@ -440,7 +434,10 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
   };
 
   const handleNav = async (cmd: string): Promise<void> => {
-    await processCommand(cmd);
+    // Nav sections use cd <name> like a real terminal
+    const cdSections = ["about", "projects", "skills", "experience", "contact"];
+    const commandToRun = cdSections.includes(cmd) ? `cd ${cmd}` : cmd;
+    await processCommand(commandToRun);
   };
 
   const focusInput = (): void => {
@@ -467,7 +464,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
     }
     // Defer to avoid synchronous setState in effect
     setTimeout(() => {
-      processCommand("welcome", true);
+      processCommand("cd welcome", true);
     }, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

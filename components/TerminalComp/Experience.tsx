@@ -109,71 +109,15 @@ const Experience: React.FC = () => {
             </div>
 
             <div className="ml-3 sm:ml-6 border-l-2 border-green-800/30 pl-3 sm:pl-6 space-y-6">
-              {/* Prominds Digital */}
+              {/* CHATI */}
               <div className="border-b border-green-800/20 pb-4">
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                   <div className="flex items-start gap-3">
                     <div className="shrink-0">
                       <Image
-                        src="/images/PromindsD.png"
-                        alt="Prominds Digital company logo"
-                        width={64}
-                        height={64}
-                        className="h-12 w-12 sm:h-16 sm:w-16 rounded-lg border border-green-800/50 bg-black/40 object-contain"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="text-green-400 font-semibold text-base sm:text-lg font-mono">
-                        Software Developer
-                      </h3>
-                      <p className="text-gray-400 text-xs sm:text-sm">
-                        Prominds Digital · Part-time
-                      </p>
-                      <p className="text-gray-500 text-xs sm:text-sm">
-                        Jul 2024 — Present · Bhubaneswar, Odisha, India ·
-                        On-site
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <ul className="mt-3 list-disc list-outside space-y-1 text-gray-300 text-xs sm:text-sm ml-4 sm:ml-6">
-                  <li>
-                    Architected and shipped a scalable SaaS showroom visitor
-                    management system for automotive dealerships.
-                  </li>
-                  <li>
-                    Deployed the platform across 5+ dealerships, processing over
-                    5,000 visitor entries every month with reliable uptime.
-                  </li>
-                  <li>
-                    Integrated core features including automated WhatsApp
-                    follow-ups, digital enquiry tracking, and end-to-end lead
-                    pipelines.
-                  </li>
-                  <li>
-                    Delivered multiple full-stack web applications tailored to
-                    diverse business workflows and requirements.
-                  </li>
-                  <li>
-                    Optimized performance across key modules, significantly
-                    improving core web vitals and user experience.
-                  </li>
-                  <li>
-                    Contributing to migration from custom infrastructure to a
-                    streamlined CRM platform.
-                  </li>
-                </ul>
-              </div>
-
-              {/* CHATI */}
-              <div>
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="flex items-start gap-3">
-                    <div className="shrink-0">
-                      <Image
                         src="/images/Chati.ico"
-                        alt="CHATI AI meeting assistant logo"
+                        alt="CHATI — Software Developer (Internship)"
+                        title="CHATI — Software Developer (Internship)"
                         width={64}
                         height={64}
                         className="h-12 w-12 sm:h-16 sm:w-16 rounded-lg border border-green-800/50 bg-black/40 object-contain"
@@ -222,6 +166,64 @@ const Experience: React.FC = () => {
                     Achieved high-speed validation and migration across 1.2M+
                     records cross-referenced with 920K+ records in under 10
                     minutes.
+                  </li>
+                </ul>
+              </div>
+
+              {/* Prominds Digital */}
+              <div>
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="shrink-0">
+                      <Image
+                        src="/images/PromindsD.png"
+                        alt="Prominds Digital — Software Developer"
+                        title="Prominds Digital — Software Developer (Part-time)"
+                        width={64}
+                        height={64}
+                        className="h-12 w-12 sm:h-16 sm:w-16 rounded-lg border border-green-800/50 bg-black/40 object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-green-400 font-semibold text-base sm:text-lg font-mono">
+                        Software Developer
+                      </h3>
+                      <p className="text-gray-400 text-xs sm:text-sm">
+                        Prominds Digital · Part-time
+                      </p>
+                      <p className="text-gray-500 text-xs sm:text-sm">
+                        Jul 2024 — Present · Bhubaneswar, Odisha, India ·
+                        On-site
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <ul className="mt-3 list-disc list-outside space-y-1 text-gray-300 text-xs sm:text-sm ml-4 sm:ml-6">
+                  <li>
+                    Architected and shipped a scalable SaaS showroom visitor
+                    management system for automotive dealerships.
+                  </li>
+                  <li>
+                    Deployed the platform across 5+ dealerships, processing over
+                    5,000 visitor entries every month with reliable uptime.
+                  </li>
+                  <li>
+                    Integrated core features including automated WhatsApp
+                    follow-ups, digital enquiry tracking, and end-to-end lead
+                    pipelines.
+                  </li>
+                  <li>
+                    Delivered multiple full-stack web applications tailored to
+                    diverse business workflows and requirements.
+                  </li>
+                  <li>
+                    Optimized performance across key modules, significantly
+                    improving core web vitals and user experience.
+                  </li>
+                  <li>
+                    Contributing to migration from custom infrastructure to a
+                    streamlined CRM platform.
                   </li>
                 </ul>
               </div>

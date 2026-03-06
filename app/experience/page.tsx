@@ -163,50 +163,6 @@ export default function Experience() {
           </header>
 
           <div>
-            {/* Prominds Digital Experience */}
-            <article
-              aria-labelledby="prominds-heading"
-              itemScope
-              itemType="https://schema.org/Organization"
-            >
-              <header>
-                <h2 id="prominds-heading" itemProp="name">
-                  Prominds Digital
-                </h2>
-                <p>
-                  <strong>Software Developer · Part-time</strong> · Jul 2024 —
-                  Present · Bhubaneswar, Odisha, India · On-site
-                </p>
-              </header>
-
-              <ul itemProp="description">
-                <li>
-                  Architected a scalable SaaS showroom visitor management system
-                  from the ground up for automotive dealerships.
-                </li>
-                <li>
-                  Deployed the platform across 5+ dealerships, processing over
-                  5,000 visitor entries monthly with reliable performance.
-                </li>
-                <li>
-                  Integrated features like automated WhatsApp follow-ups, digital
-                  enquiry tracking, and end-to-end lead management pipelines.
-                </li>
-                <li>
-                  Delivered multiple full‑stack web applications tailored to
-                  diverse business requirements.
-                </li>
-                <li>
-                  Led web performance tuning efforts that significantly improved
-                  core performance scores.
-                </li>
-                <li>
-                  Contributed to the modernization of legacy systems into a
-                  streamlined CRM‑driven workflow.
-                </li>
-              </ul>
-            </article>
-
             {/* CHATI Experience */}
             <article
               aria-labelledby="chati-heading"
@@ -249,6 +205,50 @@ export default function Experience() {
                 <li>
                   Achieved high‑speed validation, filtering, and migration for
                   hundreds of thousands of records in minutes.
+                </li>
+              </ul>
+            </article>
+
+            {/* Prominds Digital Experience */}
+            <article
+              aria-labelledby="prominds-heading"
+              itemScope
+              itemType="https://schema.org/Organization"
+            >
+              <header>
+                <h2 id="prominds-heading" itemProp="name">
+                  Prominds Digital
+                </h2>
+                <p>
+                  <strong>Software Developer · Part-time</strong> · Jul 2024 —
+                  Present · Bhubaneswar, Odisha, India · On-site
+                </p>
+              </header>
+
+              <ul itemProp="description">
+                <li>
+                  Architected a scalable SaaS showroom visitor management system
+                  from the ground up for automotive dealerships.
+                </li>
+                <li>
+                  Deployed the platform across 5+ dealerships, processing over
+                  5,000 visitor entries monthly with reliable performance.
+                </li>
+                <li>
+                  Integrated features like automated WhatsApp follow-ups, digital
+                  enquiry tracking, and end-to-end lead management pipelines.
+                </li>
+                <li>
+                  Delivered multiple full‑stack web applications tailored to
+                  diverse business requirements.
+                </li>
+                <li>
+                  Led web performance tuning efforts that significantly improved
+                  core performance scores.
+                </li>
+                <li>
+                  Contributed to the modernization of legacy systems into a
+                  streamlined CRM‑driven workflow.
                 </li>
               </ul>
             </article>
