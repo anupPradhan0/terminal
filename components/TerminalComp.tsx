@@ -286,11 +286,16 @@ const Welcome: React.FC = () => {
   );
 };
 
+const MAX_COMMAND_HISTORY = 50;
+
 export default function Terminal({ onFirstCommand }: TerminalProps) {
   const [history, setHistory] = useState<HistoryLine[]>([]);
   const [input, setInput] = useState<string>("");
   const [isFirstUserCommand, setIsFirstUserCommand] = useState<boolean>(true);
   const [isAILoading, setIsAILoading] = useState<boolean>(false);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const savedInputRef = useRef<string>("");
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -390,6 +395,15 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
 
     const trimmedCmd = cmd.trim();
 
+    // Command history: store every successfully run command (newest first), skip empty and auto
+    if (!isAuto && trimmedCmd) {
+      setCommandHistory((prev) => {
+        if (prev[0] === trimmedCmd) return prev;
+        return [trimmedCmd, ...prev].slice(0, MAX_COMMAND_HISTORY);
+      });
+      setHistoryIndex(-1);
+    }
+
     // ============ AI command: show user prompt + response (handleAICommand adds prompt so it stays visible) ============
     if (trimmedCmd.toLowerCase().startsWith("ai ")) {
       const question = trimmedCmd.substring(3).trim();
@@ -477,16 +491,42 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key !== "Tab") return;
-    e.preventDefault();
-    const raw = input.trim();
-    const matches = TAB_COMPLETIONS.filter((cmd) => cmd.startsWith(raw));
-    if (matches.length === 1) {
-      setInput(matches[0]);
-    } else if (matches.length > 1) {
-      const prefix = getCommonPrefix(matches);
-      if (prefix.length > raw.length) {
-        setInput(prefix);
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (commandHistory.length === 0) return;
+      if (historyIndex === -1) {
+        savedInputRef.current = input;
+        setHistoryIndex(0);
+        setInput(commandHistory[0]);
+      } else if (historyIndex < commandHistory.length - 1) {
+        setHistoryIndex((i) => i + 1);
+        setInput(commandHistory[historyIndex + 1]);
+      }
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (historyIndex === -1) return;
+      if (historyIndex === 0) {
+        setHistoryIndex(-1);
+        setInput(savedInputRef.current);
+      } else {
+        setHistoryIndex((i) => i - 1);
+        setInput(commandHistory[historyIndex - 1]);
+      }
+      return;
+    }
+    if (e.key === "Tab") {
+      e.preventDefault();
+      const raw = input.trim();
+      const matches = TAB_COMPLETIONS.filter((cmd) => cmd.startsWith(raw));
+      if (matches.length === 1) {
+        setInput(matches[0]);
+      } else if (matches.length > 1) {
+        const prefix = getCommonPrefix(matches);
+        if (prefix.length > raw.length) {
+          setInput(prefix);
+        }
       }
     }
   };
@@ -577,7 +617,10 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
               ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                setHistoryIndex(-1);
+              }}
               onKeyDown={handleKeyDown}
               className="terminal-input"
               onFocus={focusInput}
