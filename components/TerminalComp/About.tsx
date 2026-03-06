@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
 // Enhanced SVG Icons with hover animations - Mobile responsive
@@ -250,6 +251,7 @@ const About: React.FC = () => {
               </div>
             </div>
           </section>
+
 
           {/* Skills Section - Mobile responsive grid */}
           <section>

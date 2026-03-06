@@ -7,6 +7,7 @@ import About from "./TerminalComp/About";
 import Projects from "./TerminalComp/Projects";
 import Skills from "./TerminalComp/Skills";
 import Contact from "./TerminalComp/Contact";
+import Experience from "./TerminalComp/Experience";
 
 // Type definitions
 interface PromptProps {
@@ -182,6 +183,7 @@ const HELP_ITEMS: HelpItem[] = [
   { type: "command", command: "about", description: "Learn more about me." },
   { type: "command", command: "projects", description: "View my recent projects." },
   { type: "command", command: "skills", description: "See my technical skills." },
+  { type: "command", command: "experience", description: "View my professional experience." },
   { type: "command", command: "contact", description: "Get my contact information." },
   { type: "command", command: "ai <question>", description: "Chat with AI assistant (10 requests/day)." },
   { type: "command", command: "clear", description: "Clear the terminal screen." },
@@ -404,6 +406,10 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       case "cd skills":
         newHist.push({ type: "output", content: <Skills /> });
         break;
+      case "experience":
+      case "cd experience":
+        newHist.push({ type: "output", content: <Experience /> });
+        break;
       case "contact":
       case "cd contact":
         newHist.push({ type: "output", content: <Contact /> });
@@ -485,11 +491,11 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
         </div>
         <nav className="terminal-nav" aria-label="Terminal navigation">
           {[
-            "welcome",
             "help",
             "about",
             "projects",
             "skills",
+            "experience",
             "contact",
             "clear",
             "refresh",
