@@ -18,20 +18,49 @@ import {
   useSphericalJoint,
 } from "@react-three/rapier";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
+import "@/public/css/IdentityComp.css";
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 useGLTF.preload("/models/card.glb");
 useTexture.preload("/images/lanyard.jpg");
 
+function BlackBackground() {
+  const { scene } = useThree();
+  useEffect(() => {
+    scene.background = new THREE.Color(0x000000);
+    scene.environment = null;
+  }, [scene]);
+  return null;
+}
+
 export default function Tag() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
-    <Canvas camera={{ position: [0, 0, 13], fov: 25 }} style={{ touchAction: "none" }}>
-      <ambientLight intensity={Math.PI} />
-      <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
-        <Band />
-      </Physics>
-      <Environment background blur={0.75}>
-        <color attach="background" args={["black"]} />
+    <div
+      className="identity-container"
+      style={{ height: "100%", width: "100%", position: "relative", backgroundColor: "#000" }}
+    >
+      <Canvas
+        camera={{ position: [0, 0, 13], fov: 25 }}
+        style={{ touchAction: "none", background: "#000" }}
+        gl={{ alpha: false }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 1);
+        }}
+      >
+        <BlackBackground />
+        <ambientLight intensity={Math.PI} />
+        <Physics interpolate gravity={[0, -40, 0]} timeStep={1 / 60}>
+          <Band />
+        </Physics>
+      <Environment environmentIntensity={0} background={false}>
         <Lightformer
           intensity={2}
           color="white"
@@ -61,7 +90,22 @@ export default function Tag() {
           scale={[100, 10, 1]}
         />
       </Environment>
-    </Canvas>
+      </Canvas>
+      <div
+        className="interaction-label"
+        role="complementary"
+        aria-label="Motivational quote"
+        style={{
+          position: "absolute",
+          bottom: "1rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 10,
+        }}
+      >
+        [負けたらどうせ俺はその程度の男なんだから…]
+      </div>
+    </div>
   );
 }
 

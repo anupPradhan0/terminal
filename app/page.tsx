@@ -128,7 +128,7 @@ export default function Home() {
         <div className="main-content-area">
           {/* Identity Card Section */}
           <section
-            className={`identity-pane border-2 border-green-400 ${
+            className={`identity-pane ${
               firstCommandExecuted ? "hide-on-mobile" : ""
             }`}
             aria-label="Developer Identity Card - Anup Pradhan Software Developer specializing in backend development and machine learning"

@@ -107,7 +107,8 @@ body, html {
   height: 100vh;
   flex-shrink: 0;
   position: relative;
-  border: 2px solid #10b981; /* Green border on all four corners */
+  background-color: #000;
+  border: 2px solid #1a1a1a;
   box-sizing: border-box;
   overflow-y: auto;
 }
@@ -162,7 +163,7 @@ body, html {
     min-height: 35vh; /* Force minimum height */
     flex-shrink: 0;
     flex-grow: 0;
-    border: 2px solid #10b981; /* Green border on all four corners */
+
     overflow: hidden; /* Hide all overflow */
     position: relative;
   }
@@ -198,7 +199,7 @@ body, html {
     min-height: 35vh;
     padding: 4px;
     overflow: hidden;
-    border: 2px solid #10b981; /* Green border on all four corners */
+
   }
   
   .terminal-pane {
@@ -224,7 +225,6 @@ body, html {
     min-height: 35vh;
     padding: 2px;
     overflow: hidden;
-    border: 2px solid #10b981; /* Green border on all four corners */
   }
   
   .terminal-pane {
@@ -253,7 +253,6 @@ body, html {
     height: 100vh;
     max-height: 100vh;
     min-height: 100vh;
-    border: 2px solid #10b981; /* Green border on all four corners */
     overflow: hidden;
   }
   
