@@ -1,16 +1,17 @@
-/* Container - Same as terminal: #000, no inner border (pane has the green border) */
+/* Container - fills pane; pane has the padding for space inside green border */
 .identity-container { 
   perspective: 800px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 0.5rem 2rem;
+  padding: 0;
   background: #000;
   color: #22c55e;
   font-family: Consolas, Menlo, monospace;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+  min-height: 0;
   box-sizing: border-box;
 }
 
@@ -45,7 +46,6 @@
 @media (min-width: 640px) {
   .identity-container {
     perspective: 1000px;
-    padding: 2rem;
   }
 }
 
