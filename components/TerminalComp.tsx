@@ -8,6 +8,18 @@ import Projects from "./TerminalComp/Projects";
 import Skills from "./TerminalComp/Skills";
 import Contact from "./TerminalComp/Contact";
 import Experience from "./TerminalComp/Experience";
+import {
+  HOME_DIR,
+  FILE_CONTENTS,
+  formatLsLong,
+  getCalOutput,
+  printfFormat,
+  MAN_PAGES,
+  getFortune,
+  getCowsay,
+  getBanner,
+  getNeofetch,
+} from "./TerminalComp/commands/virtualFs";
 
 // Type definitions
 interface PromptProps {
@@ -157,7 +169,7 @@ const AILoading: React.FC = () => {
   );
 };
 
-const Prompt: React.FC<PromptProps> = ({ user, host }) => (
+const Prompt: React.FC<PromptProps & { cwd?: string }> = ({ user, host, cwd = "~" }) => (
   <span
     className="terminal-prompt"
     aria-label={`Command prompt for ${user} at ${host}`}
@@ -166,7 +178,7 @@ const Prompt: React.FC<PromptProps> = ({ user, host }) => (
       {user}@{host}
     </span>
     <span className="prompt-separator">:</span>
-    <span className="prompt-directory">~</span>
+    <span className="prompt-directory">{cwd === "~" ? "~" : cwd}</span>
     <span className="prompt-symbol">$ </span>
   </span>
 );
@@ -179,18 +191,32 @@ const OutputLine: React.FC<OutputLineProps> = ({ children }) => (
 const HELP_ITEMS: HelpItem[] = [
   { type: "title", text: "Available commands:" },
   { type: "command", command: "help", description: "Display this help message." },
-  { type: "command", command: "ls", description: "List available commands (same as help)." },
-  { type: "command", command: "cd <name>", description: "Open a section (e.g. cd about, cd projects)." },
+  { type: "command", command: "ls [-l|-a|-la]", description: "List directory contents." },
+  { type: "command", command: "pwd", description: "Print working directory." },
+  { type: "command", command: "cd [dir]", description: "Change directory. cd with no args goes home." },
   { type: "command", command: "cd welcome", description: "Display the welcome message." },
   { type: "command", command: "cd about", description: "Learn more about me." },
   { type: "command", command: "cd projects", description: "View my recent projects." },
   { type: "command", command: "cd skills", description: "See my technical skills." },
   { type: "command", command: "cd experience", description: "View my professional experience." },
   { type: "command", command: "cd contact", description: "Get my contact information." },
+  { type: "command", command: "cat <file>", description: "Print file contents (e.g. cat README)." },
+  { type: "command", command: "whoami", description: "Print current user." },
+  { type: "command", command: "hostname", description: "Print system hostname." },
+  { type: "command", command: "id", description: "Print user and group IDs." },
+  { type: "command", command: "uname [-a]", description: "Print system info." },
+  { type: "command", command: "date", description: "Print current date and time." },
+  { type: "command", command: "cal", description: "Display current month calendar." },
+  { type: "command", command: "echo <text>", description: "Print the given text." },
+  { type: "command", command: "printf <format> [args]", description: "Print formatted string (%s, %d, \\n)." },
+  { type: "command", command: "history", description: "List recent commands." },
+  { type: "command", command: "man <cmd>", description: "Show manual for command." },
+  { type: "command", command: "neofetch", description: "Display system info and ASCII logo." },
+  { type: "command", command: "fortune", description: "Print a random quote." },
+  { type: "command", command: "cowsay [msg]", description: "Cow says your message." },
+  { type: "command", command: "banner <text>", description: "Print text in large ASCII." },
+  { type: "command", command: "yes [string]", description: "Repeat string (limited)." },
   { type: "command", command: "ai <question>", description: "Chat with AI assistant (10 requests/day)." },
-  { type: "command", command: "whoami", description: "Print current user (flavor)." },
-  { type: "command", command: "date", description: "Print current system date and time." },
-  { type: "command", command: "echo <text>", description: "Print the given text (flavor)." },
   { type: "command", command: "clear", description: "Clear the terminal screen." },
   { type: "command", command: "refresh", description: "Reload the page." },
   { type: "command", command: "exit", description: "Close this tab/window." },
@@ -213,9 +239,26 @@ const TAB_COMPLETIONS: string[] = [
   "cd contact",
   "help",
   "ls",
+  "ls -l",
+  "ls -la",
+  "pwd",
+  "cat",
   "whoami",
+  "hostname",
+  "id",
+  "uname",
+  "uname -a",
   "date",
+  "cal",
   "echo",
+  "printf",
+  "history",
+  "man",
+  "neofetch",
+  "fortune",
+  "cowsay",
+  "banner",
+  "yes",
   "clear",
   "refresh",
   "exit",
@@ -296,9 +339,12 @@ const Welcome: React.FC = () => {
 
 const MAX_COMMAND_HISTORY = 50;
 
+const PWD_DISPLAY = "/home/anup";
+
 export default function Terminal({ onFirstCommand }: TerminalProps) {
   const [history, setHistory] = useState<HistoryLine[]>([]);
   const [input, setInput] = useState<string>("");
+  const [cwd, setCwd] = useState<string>("~");
   const [isFirstUserCommand, setIsFirstUserCommand] = useState<boolean>(true);
   const [isAILoading, setIsAILoading] = useState<boolean>(false);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -444,55 +490,223 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
       return;
     }
 
-    switch (trimmedCmd.toLowerCase()) {
-      case "help":
-      case "ls":
-        newHist.push({ type: "output", content: <Help /> });
-        break;
-      case "cd welcome":
-        newHist.push({ type: "output", content: <Welcome /> });
-        break;
-      case "cd about":
-        newHist.push({ type: "output", content: <About /> });
-        break;
-      case "cd projects":
-        newHist.push({ type: "output", content: <Projects /> });
-        break;
-      case "cd skills":
-        newHist.push({ type: "output", content: <Skills /> });
-        break;
-      case "cd experience":
-        newHist.push({ type: "output", content: <Experience /> });
-        break;
-      case "cd contact":
-        newHist.push({ type: "output", content: <Contact /> });
-        break;
-      case "whoami":
-        newHist.push({ type: "output", content: user });
-        break;
-      case "date":
-        newHist.push({
-          type: "output",
-          content: new Date().toString(),
-        });
-        break;
-      case "clear":
-        setHistory([]);
+    const parts = trimmedCmd.split(/\s+/);
+    const commandName = parts[0]?.toLowerCase() ?? "";
+    const args = parts.slice(1);
+
+    // pwd
+    if (commandName === "pwd") {
+      newHist.push({ type: "output", content: cwd === "~" ? PWD_DISPLAY : cwd });
+      setHistory(newHist);
+      return;
+    }
+
+    // ls [ -l | -a | -la ]
+    if (commandName === "ls") {
+      const long = args.includes("-l") || args.includes("-la");
+      const list = [...HOME_DIR];
+      const out = long ? formatLsLong(list) : list.join("  ");
+      newHist.push({ type: "output", content: <pre className="pre-output">{out}</pre> });
+      setHistory(newHist);
+      return;
+    }
+
+    // cat <file>
+    if (commandName === "cat") {
+      const name = args[0];
+      if (!name) {
+        newHist.push({ type: "output", content: "cat: missing operand" });
+        setHistory(newHist);
         return;
-      case "refresh":
-        window.location.reload();
-        return;
-      default:
+      }
+      const key = HOME_DIR.find((e) => e.toLowerCase() === name.toLowerCase());
+      if (key && FILE_CONTENTS[key]) {
+        newHist.push({ type: "output", content: FILE_CONTENTS[key] });
+      } else {
         newHist.push({
           type: "output",
           content: (
             <span className="terminal-stderr">
-              bash: command not found: {cmd}
+              cat: {name}: No such file or directory
             </span>
           ),
         });
-        break;
+      }
+      setHistory(newHist);
+      return;
     }
+
+    // cd [dir]
+    if (commandName === "cd") {
+      if (args.length === 0) {
+        setCwd("~");
+        newHist.push({ type: "output", content: "" });
+        setHistory(newHist);
+        return;
+      }
+      const dir = args[0].toLowerCase();
+      const sectionMap: Record<string, React.ReactNode> = {
+        welcome: <Welcome />,
+        about: <About />,
+        projects: <Projects />,
+        skills: <Skills />,
+        experience: <Experience />,
+        contact: <Contact />,
+      };
+      if (sectionMap[dir] !== undefined) {
+        setCwd("~");
+        newHist.push({ type: "output", content: sectionMap[dir] });
+        setHistory(newHist);
+        return;
+      }
+      newHist.push({
+        type: "output",
+        content: (
+          <span className="terminal-stderr">
+            cd: {args[0]}: No such file or directory
+          </span>
+        ),
+      });
+      setHistory(newHist);
+      return;
+    }
+
+    // hostname, id, uname, cal, history, printf, man
+    if (commandName === "hostname") {
+      newHist.push({ type: "output", content: host });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "id") {
+      newHist.push({
+        type: "output",
+        content: `uid=1000(${user}) gid=1000(${user}) groups=1000(${user})`,
+      });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "uname") {
+      const all = args.includes("-a");
+      newHist.push({
+        type: "output",
+        content: all
+          ? `Linux ${host} 6.x portfolio-terminal #1 Next.js`
+          : "Linux",
+      });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "cal") {
+      newHist.push({ type: "output", content: <pre className="pre-output">{getCalOutput()}</pre> });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "history") {
+      const list = commandHistory
+        .map((c, i) => `  ${i + 1}  ${c}`)
+        .join("\n");
+      newHist.push({ type: "output", content: <pre className="pre-output">{list || " (empty)"}</pre> });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "printf") {
+      const format = args[0] ?? "";
+      const out = printfFormat(format, args.slice(1));
+      newHist.push({ type: "output", content: out });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "man") {
+      const topic = args[0]?.toLowerCase();
+      const page = topic ? MAN_PAGES[topic] : null;
+      if (page) {
+        newHist.push({ type: "output", content: page });
+      } else {
+        newHist.push({
+          type: "output",
+          content: (
+            <span className="terminal-stderr">
+              No manual entry for {topic ?? ""}
+            </span>
+          ),
+        });
+      }
+      setHistory(newHist);
+      return;
+    }
+
+    // neofetch, fortune, cowsay, banner, yes
+    if (commandName === "neofetch") {
+      newHist.push({ type: "output", content: <pre className="pre-output">{getNeofetch(user, host)}</pre> });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "fortune") {
+      newHist.push({ type: "output", content: getFortune() });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "cowsay") {
+      const msg = args.length ? args.join(" ") : "moo";
+      newHist.push({ type: "output", content: <pre className="pre-output">{getCowsay(msg)}</pre> });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "banner") {
+      const text = args.length ? args.join(" ") : " ";
+      newHist.push({ type: "output", content: <pre className="pre-output">{getBanner(text)}</pre> });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "yes") {
+      const word = args.length ? args.join(" ") : "y";
+      const repeated = Array(8)
+        .fill(word)
+        .join("\n");
+      newHist.push({ type: "output", content: repeated });
+      setHistory(newHist);
+      return;
+    }
+
+    // help, whoami, date, clear, refresh, exit
+    if (commandName === "help") {
+      newHist.push({ type: "output", content: <Help /> });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "whoami") {
+      newHist.push({ type: "output", content: user });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "date") {
+      newHist.push({ type: "output", content: new Date().toString() });
+      setHistory(newHist);
+      return;
+    }
+    if (commandName === "clear") {
+      setHistory([]);
+      return;
+    }
+    if (commandName === "refresh") {
+      window.location.reload();
+      return;
+    }
+    if (commandName === "exit") {
+      newHist.push({ type: "output", content: "Close this tab to exit." });
+      setHistory(newHist);
+      return;
+    }
+
+    // command not found
+    newHist.push({
+      type: "output",
+      content: (
+        <span className="terminal-stderr">
+          bash: command not found: {parts[0] ?? commandName}
+        </span>
+      ),
+    });
     setHistory(newHist);
   };
 
@@ -654,7 +868,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
           <div key={i} className="history-line">
             {line.type === "prompt" ? (
               <div>
-                <Prompt user={user} host={host} />
+                <Prompt user={user} host={host} cwd={cwd} />
                 <span className="command-text">{line.command}</span>
               </div>
             ) : (
@@ -666,7 +880,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
           <label htmlFor="terminal-input" className="sr-only">
             Terminal command input
           </label>
-          <Prompt user={user} host={host} />
+          <Prompt user={user} host={host} cwd={cwd} />
           <div className="input-area">
             <span className="input-value" aria-hidden="true">
               {input}
