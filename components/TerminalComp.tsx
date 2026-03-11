@@ -229,7 +229,7 @@ const WELCOME_LINES: string[] = [
   "✨ NEW: Try 'ai <your question>' to chat with AI assistant!",
 ];
 
-// Tab completion: commands that can be completed when user presses Tab
+// Tab completion: full-line completions (for backward compatibility)
 const TAB_COMPLETIONS: string[] = [
   "cd welcome",
   "cd about",
@@ -264,6 +264,39 @@ const TAB_COMPLETIONS: string[] = [
   "exit",
 ];
 
+// Command names for first-word completion and man
+const COMMAND_NAMES = [
+  "help",
+  "ls",
+  "ls -l",
+  "ls -la",
+  "ls -a",
+  "pwd",
+  "cd",
+  "cat",
+  "whoami",
+  "hostname",
+  "id",
+  "uname",
+  "date",
+  "cal",
+  "echo",
+  "printf",
+  "history",
+  "man",
+  "clear",
+  "refresh",
+  "exit",
+  "ai",
+  "neofetch",
+  "fortune",
+  "cowsay",
+  "banner",
+  "yes",
+];
+
+const CD_SECTIONS = ["welcome", "about", "projects", "skills", "experience", "contact"];
+
 function getCommonPrefix(strings: string[]): string {
   if (strings.length === 0) return "";
   let i = 0;
@@ -273,6 +306,58 @@ function getCommonPrefix(strings: string[]): string {
     else break;
   }
   return strings[0].slice(0, i);
+}
+
+/** Context-aware tab completion: returns matches and the line to set (single match or common prefix). */
+function getTabCompletion(
+  input: string
+): { matches: string[]; setLine: string; isPartial: boolean } {
+  const raw = input.trimEnd();
+  const endsWithSpace = /\s$/.test(input);
+  const parts = raw.split(/\s+/).filter(Boolean);
+  const command = parts[0]?.toLowerCase() ?? "";
+  const isCompletingArg = endsWithSpace || parts.length > 1;
+  const prefix = isCompletingArg && parts.length > 0
+    ? (endsWithSpace ? "" : (parts[parts.length - 1] ?? ""))
+    : raw;
+  const argPrefix = prefix.toLowerCase();
+  const baseForArg = endsWithSpace ? raw + " " : parts.slice(0, -1).join(" ") + (parts.length > 1 ? " " : "");
+
+  if (isCompletingArg && (command === "cd" || command === "cat" || command === "man")) {
+    const list =
+      command === "cd" ? CD_SECTIONS
+      : command === "cat" ? [...HOME_DIR]
+      : COMMAND_NAMES;
+    const matches = list.filter((s) => String(s).toLowerCase().startsWith(argPrefix));
+    if (matches.length === 0) return { matches: [], setLine: input, isPartial: false };
+    const common = getCommonPrefix(matches);
+    const setLine = matches.length === 1 ? baseForArg + matches[0] : baseForArg + common;
+    return {
+      matches,
+      setLine,
+      isPartial: matches.length > 1 && common.length === prefix.length,
+    };
+  }
+
+  if (parts.length === 1 && !endsWithSpace) {
+    const matches = COMMAND_NAMES.filter((c) => c.startsWith(argPrefix));
+    if (matches.length === 0) return { matches: [], setLine: input, isPartial: false };
+    const common = getCommonPrefix(matches);
+    return {
+      matches,
+      setLine: matches.length === 1 ? matches[0] : common,
+      isPartial: matches.length > 1 && common.length === prefix.length,
+    };
+  }
+
+  const matches = TAB_COMPLETIONS.filter((c) => c.startsWith(raw));
+  if (matches.length === 0) return { matches: [], setLine: input, isPartial: false };
+  const common = getCommonPrefix(matches);
+  return {
+    matches,
+    setLine: matches.length === 1 ? matches[0] : (common.length > raw.length ? common : raw),
+    isPartial: matches.length > 1 && common.length === raw.length,
+  };
 }
 
 const Help: React.FC = () => {
@@ -345,6 +430,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
   const [history, setHistory] = useState<HistoryLine[]>([]);
   const [input, setInput] = useState<string>("");
   const [cwd, setCwd] = useState<string>("~");
+  const [tabSuggestions, setTabSuggestions] = useState<string[] | null>(null);
   const [isFirstUserCommand, setIsFirstUserCommand] = useState<boolean>(true);
   const [isAILoading, setIsAILoading] = useState<boolean>(false);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -713,6 +799,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (isAILoading) return;
+    setTabSuggestions(null);
     processCommand(input);
     setInput("");
   };
@@ -787,15 +874,13 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
     }
     if (e.key === "Tab") {
       e.preventDefault();
-      const raw = input.trim();
-      const matches = TAB_COMPLETIONS.filter((cmd) => cmd.startsWith(raw));
+      const { matches, setLine, isPartial } = getTabCompletion(input);
       if (matches.length === 1) {
-        setInput(matches[0]);
+        setInput(setLine);
+        setTabSuggestions(null);
       } else if (matches.length > 1) {
-        const prefix = getCommonPrefix(matches);
-        if (prefix.length > raw.length) {
-          setInput(prefix);
-        }
+        setInput(setLine);
+        setTabSuggestions(matches);
       }
     }
   };
@@ -894,6 +979,7 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
               onChange={(e) => {
                 setInput(e.target.value);
                 setHistoryIndex(-1);
+                setTabSuggestions(null);
               }}
               onKeyDown={handleKeyDown}
               className="terminal-input"
@@ -905,6 +991,18 @@ export default function Terminal({ onFirstCommand }: TerminalProps) {
             />
           </div>
         </form>
+        {tabSuggestions && tabSuggestions.length > 0 && (
+          <div className="tab-suggestions" role="listbox" aria-label="Tab completion suggestions">
+            <div className="tab-suggestions-label">Suggestions (Tab to complete):</div>
+            <ul className="tab-suggestions-list">
+              {tabSuggestions.map((s, i) => (
+                <li key={i} className="tab-suggestions-item">
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </main>
     </div>
   );
