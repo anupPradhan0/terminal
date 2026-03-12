@@ -458,7 +458,7 @@ const Projects: React.FC = () => {
                       <span className="text-gray-400 flex-shrink-0">
                         git clone
                       </span>
-                      <span className="text-blue-400 truncate min-w-0 flex-1">
+                      <span className="text-blue-400 min-w-0 flex-1 break-all sm:truncate">
                         {project.githubUrl}.git
                       </span>
                       <span className="flex items-center space-x-2 flex-shrink-0">

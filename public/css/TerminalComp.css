@@ -25,6 +25,7 @@
   font-family: var(--terminal-font);
   font-size: 0.875rem;
   border: 2px solid #22c55e;
+  overflow-x: hidden;
 }
 
 /* CRT scanlines: subtle horizontal lines overlay (old monitor look) */
@@ -129,6 +130,7 @@
   flex: 1;
   padding: 1rem;
   overflow-y: auto;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
@@ -170,7 +172,8 @@
   margin: 0;
   font-family: inherit;
   font-size: inherit;
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   color: #e5e7eb;
 }
 
@@ -195,7 +198,8 @@
   font-size: 0.7rem;
   line-height: 1.2;
   color: #22c55e;
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   letter-spacing: 0.02em;
 }
 
@@ -343,9 +347,22 @@
     margin-bottom: 0.5rem;
     font-size: 0.75rem;
   }
+
+  .terminal-body {
+    padding: 0.75rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .terminal-header {
+    padding: 0.4rem;
+  }
+
+  .dot {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+
   .terminal-nav {
     gap: 0.25rem;
     padding: 0 0.5rem;
@@ -359,6 +376,19 @@
     padding: 0.4rem 0.6rem;
     margin-bottom: 0.5rem;
   }
+
+  .terminal-body {
+    padding: 0.6rem;
+  }
+
+  .history-line {
+    margin-bottom: 0.4rem;
+  }
+
+  .tab-suggestions {
+    font-size: 0.75rem;
+    padding: 0.45rem 0.6rem;
+  }
 }
 
 @media (max-width: 360px) {
@@ -366,6 +396,10 @@
     font-size: 0.65rem;
     padding: 0.3rem 0.5rem;
     min-width: 60px;
+  }
+
+  .terminal-body {
+    padding: 0.5rem;
   }
 }
 
@@ -393,6 +427,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
+  max-height: 6.5rem;
+  overflow-y: auto;
 }
 
 .tab-suggestions-item {
