@@ -21,7 +21,7 @@ export const FILE_CONTENTS: Record<string, string> = {
   projects:
     "Recent projects: WhatsApp Campaign Management, RukiAI, Digit Recognizer, AI Madness, and more. Type 'cd projects' to browse with links and descriptions.",
   skills:
-    "Tech: JavaScript, TypeScript, Python, React, Next.js, Node.js, MongoDB, Git, Docker, AI/ML basics. Type 'cd skills' to see categories.",
+    "Tech: Frontend — React, Next.js, Remix, TanStack Query. Backend — Node.js, Express, FastAPI, Auth0. DBs — MongoDB, RabbitMQ, Redis. AI/ML — Pandas, PyTorch, Gemini API, OpenAI API. Tools — Docker, Dokploy, S3, Cloudinary. Type 'cd skills' to see all.",
   experience:
     "CHATI (Software Developer Intern), Prominds Digital (Part-time). Type 'cd experience' for full timeline.",
   contact:
