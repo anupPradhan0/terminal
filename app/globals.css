@@ -60,25 +60,21 @@ html {
 /* Auto-hide scrollbar when not hovering */
 @media screen and (min-width: 769px) {
 
-  .identity-pane::-webkit-scrollbar,
-  .terminal-pane::-webkit-scrollbar {
+  .identity-pane::-webkit-scrollbar {
     opacity: 0;
     transition: opacity 0.3s ease;
   }
 
-  .identity-pane:hover::-webkit-scrollbar,
-  .terminal-pane:hover::-webkit-scrollbar {
+  .identity-pane:hover::-webkit-scrollbar {
     opacity: 1;
   }
 
-  .identity-pane::-webkit-scrollbar-thumb,
-  .terminal-pane::-webkit-scrollbar-thumb {
+  .identity-pane::-webkit-scrollbar-thumb {
     opacity: 0.7;
     transition: all 0.3s ease;
   }
 
-  .identity-pane:hover::-webkit-scrollbar-thumb,
-  .terminal-pane:hover::-webkit-scrollbar-thumb {
+  .identity-pane:hover::-webkit-scrollbar-thumb {
     opacity: 1;
   }
 }
