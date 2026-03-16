@@ -246,10 +246,6 @@ export default function Experience() {
                   Led web performance tuning efforts that significantly improved
                   core performance scores.
                 </li>
-                <li>
-                  Contributed to the modernization of legacy systems into a
-                  streamlined CRM‑driven workflow.
-                </li>
               </ul>
             </article>
           </div>

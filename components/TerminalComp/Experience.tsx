@@ -228,10 +228,6 @@ const Experience: React.FC = () => {
                     Optimized performance across key modules, significantly
                     improving core web vitals and user experience.
                   </li>
-                  <li>
-                    Contributing to migration from custom infrastructure to a
-                    streamlined CRM platform.
-                  </li>
                 </ul>
               </div>
             </div>
