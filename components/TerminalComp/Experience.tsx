@@ -163,6 +163,13 @@ const Experience: React.FC = () => {
                     main database.
                   </li>
                   <li>
+                    Designed and implemented a Union–Find based deduplication
+                    system that groups related citizen records into duplicate
+                    clusters in near O(1) time per link, keeping
+                    <code className="mx-1">/v1/citizen/all/unverified</code>
+                    fast and scalable.
+                  </li>
+                  <li>
                     Achieved high-speed validation and migration across 1.2M+
                     records cross-referenced with 920K+ records in under 10
                     minutes.
